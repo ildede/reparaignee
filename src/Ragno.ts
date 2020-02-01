@@ -21,8 +21,13 @@ export class Ragno extends Phaser.GameObjects.Image {
         this.setPosition(point.x, point.y);
     }
 
-    left() {
-        this.myWebNode = this.ragantela.getNodeOnLeft(this.myWebNode);
+    up() {
+        this.myWebNode = this.ragantela.getNodeOnTop(this.myWebNode);
+        this.updatePosition();
+    }
+
+    upRight() {
+        this.myWebNode = this.ragantela.getNodeOnTopRight(this.myWebNode);
         this.updatePosition();
     }
 
@@ -31,13 +36,28 @@ export class Ragno extends Phaser.GameObjects.Image {
         this.updatePosition();
     }
 
-    up() {
-        this.myWebNode = this.ragantela.getNodeOnTop(this.myWebNode);
+    downRight() {
+        this.myWebNode = this.ragantela.getNodeOnBottomRight(this.myWebNode);
         this.updatePosition();
     }
 
     down() {
         this.myWebNode = this.ragantela.getNodeOnBottom(this.myWebNode);
+        this.updatePosition();
+    }
+
+    downLeft() {
+        this.myWebNode = this.ragantela.getNodeOnBottomLeft(this.myWebNode);
+        this.updatePosition();
+    }
+
+    left() {
+        this.myWebNode = this.ragantela.getNodeOnLeft(this.myWebNode);
+        this.updatePosition();
+    }
+
+    upLeft() {
+        this.myWebNode = this.ragantela.getNodeOnTopLeft(this.myWebNode);
         this.updatePosition();
     }
 }

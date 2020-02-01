@@ -189,6 +189,22 @@ export class Ragnatela extends Phaser.GameObjects.Image {
         }
     }
 
+    getNodeOnTopRight(webNode: WebNode) {
+        return undefined;
+    }
+
+    getNodeOnBottomRight(webNode: WebNode) {
+        return undefined;
+    }
+
+    getNodeOnBottomLeft(webNode: WebNode) {
+        return undefined;
+    }
+
+    getNodeOnTopLeft(webNode: WebNode) {
+        return undefined;
+    }
+
     private static goOut(webNode: WebNode) {
         return webNode.giro < 3 ? webNode.giro + 1 : webNode.giro;
     }
