@@ -5,13 +5,20 @@ import {WebNode} from "./WebNode";
 
 export class Ragnatela extends Phaser.GameObjects.Image {
 
-    private A: Array<{point: Point, line: Point, insect: boolean, broken: boolean}>;
-    private B: Array<{point: Point, line: Point, insect: boolean, broken: boolean}>;
-    private C: Array<{point: Point, line: Point, insect: boolean, broken: boolean}>;
-    private D: Array<{point: Point, line: Point, insect: boolean, broken: boolean}>;
-    private E: Array<{point: Point, line: Point, insect: boolean, broken: boolean}>;
-    private F: Array<{point: Point, line: Point, insect: boolean, broken: boolean}>;
-    private Z: Array<{point: Point, line: Point, insect: boolean, broken: boolean}>;
+    private A: Array<{point: Point}>;
+    private B: Array<{point: Point}>;
+    private C: Array<{point: Point}>;
+    private D: Array<{point: Point}>;
+    private E: Array<{point: Point}>;
+    private F: Array<{point: Point}>;
+    private Z: Array<{point: Point}>;
+
+    private AB: Array<{point: Point, insect: boolean, broken: boolean}>;
+    private BC: Array<{point: Point, insect: boolean, broken: boolean}>;
+    private CD: Array<{point: Point, insect: boolean, broken: boolean}>;
+    private DE: Array<{point: Point, insect: boolean, broken: boolean}>;
+    private EF: Array<{point: Point, insect: boolean, broken: boolean}>;
+    private FA: Array<{point: Point, insect: boolean, broken: boolean}>;
 
     constructor(scene: Scene, texture: string) {
         super(
@@ -23,42 +30,78 @@ export class Ragnatela extends Phaser.GameObjects.Image {
         scene.add.existing(this);
 
         this.A = [
-            { point: new Point(69, 61), line: new Point(82,58), insect: false, broken: false },
-            { point: new Point(61, 56), line: new Point(79,51), insect: false, broken: false },
-            { point: new Point(53, 49), line: new Point(77,45), insect: false, broken: false },
-            { point: new Point(45, 44), line: new Point(73,35), insect: false, broken: false },
+            { point: new Point(69, 61) },
+            { point: new Point(61, 56) },
+            { point: new Point(53, 49) },
+            { point: new Point(45, 44) },
             ];
         this.B = [
-            { point: new Point(91, 58), line: new Point(96,62), insect: false, broken: false },
-            { point: new Point(95, 47), line: new Point(102,53), insect: false, broken: false },
-            { point: new Point(98, 39), line: new Point(110,47), insect: false, broken: false },
-            { point: new Point(101,27), line: new Point(120,40), insect: false, broken: false },
+            { point: new Point(91, 58) },
+            { point: new Point(95, 47) },
+            { point: new Point(98, 39) },
+            { point: new Point(101,27) },
             ];
         this.C = [
-            { point: new Point(101,66), line: new Point(101,73), insect: false, broken: false },
-            { point: new Point(113,62), line: new Point(112,75), insect: false, broken: false },
-            { point: new Point(129,56), line: new Point(121,76), insect: false, broken: false },
-            { point: new Point(141,51), line: new Point(132,77), insect: false, broken: false },
+            { point: new Point(101,66) },
+            { point: new Point(113,62) },
+            { point: new Point(129,56) },
+            { point: new Point(141,51) },
             ];
         this.D = [
-            { point: new Point(100,83), line: new Point(89,88), insect: false, broken: false },
-            { point: new Point(109,91), line: new Point(90,99), insect: false, broken: false },
-            { point: new Point(119,98), line: new Point(94,109), insect: false, broken: false },
-            { point: new Point(129,104), line: new Point(97,115), insect: false, broken: false },
+            { point: new Point(100,83) },
+            { point: new Point(109,91) },
+            { point: new Point(119,98) },
+            { point: new Point(129,104) },
             ];
         this.E = [
-            { point: new Point(78,92), line: new Point(72,87), insect: false, broken: false },
-            { point: new Point(72,109), line: new Point(63,95), insect: false, broken: false },
-            { point: new Point(65,124), line: new Point(54,106), insect: false, broken: false },
-            { point: new Point(60,140), line: new Point(48,111), insect: false, broken: false },
+            { point: new Point(78,92) },
+            { point: new Point(72,109) },
+            { point: new Point(65,124) },
+            { point: new Point(60,140) },
             ];
         this.F = [
-            { point: new Point(66, 80), line: new Point(67,70), insect: false, broken: false },
-            { point: new Point(53, 85), line: new Point(58,69), insect: false, broken: false },
-            { point: new Point(43, 89), line: new Point(49,67), insect: false, broken: false },
-            { point: new Point(34, 92), line: new Point(39,67), insect: false, broken: false },
+            { point: new Point(66, 80) },
+            { point: new Point(53, 85) },
+            { point: new Point(43, 89) },
+            { point: new Point(34, 92) },
             ];
-        this.Z = [{ point: new Point(85,73), line: new Point(85,73), insect: false, broken: false }];
+        this.AB = [
+            { point: new Point(82,58), insect: false, broken: false },
+            { point: new Point(79,51), insect: false, broken: false },
+            { point: new Point(77,45), insect: false, broken: false },
+            { point: new Point(73,35), insect: false, broken: false },
+            ];
+        this.BC = [
+            { point: new Point(96,62), insect: false, broken: false },
+            { point: new Point(102,53), insect: false, broken: false },
+            { point: new Point(110,47), insect: false, broken: false },
+            { point: new Point(120,40), insect: false, broken: false },
+            ];
+        this.CD = [
+            { point: new Point(101,73), insect: false, broken: false },
+            { point: new Point(112,75), insect: false, broken: false },
+            { point: new Point(121,76), insect: false, broken: false },
+            { point: new Point(132,77), insect: false, broken: false },
+            ];
+        this.DE = [
+            { point: new Point(89,88), insect: false, broken: false },
+            { point: new Point(90,99), insect: false, broken: false },
+            { point: new Point(94,109), insect: false, broken: false },
+            { point: new Point(97,115), insect: false, broken: false },
+            ];
+        this.EF = [
+            { point: new Point(72,87), insect: false, broken: false },
+            { point: new Point(63,95), insect: false, broken: false },
+            { point: new Point(54,106), insect: false, broken: false },
+            { point: new Point(48,111), insect: false, broken: false },
+            ];
+        this.FA = [
+            { point: new Point(67,70), insect: false, broken: false },
+            { point: new Point(58,69), insect: false, broken: false },
+            { point: new Point(49,67), insect: false, broken: false },
+            { point: new Point(39,67), insect: false, broken: false },
+            ];
+        this.Z = [{ point: new Point(85,73) }];
     }
 
     getStartingNode() {
@@ -70,27 +113,27 @@ export class Ragnatela extends Phaser.GameObjects.Image {
         let node;
         switch (ramo) {
             case 0: {
-                node = this.randomNodeFrom('A');
+                node = this.randomLineFrom('AB');
                 break;
             }
             case 1: {
-                node = this.randomNodeFrom('B');
+                node = this.randomLineFrom('BC');
                 break;
             }
             case 2: {
-                node = this.randomNodeFrom('C');
+                node = this.randomLineFrom('CD');
                 break;
             }
             case 3: {
-                node = this.randomNodeFrom('D');
+                node = this.randomLineFrom('DE');
                 break;
             }
             case 4: {
-                node = this.randomNodeFrom('E');
+                node = this.randomLineFrom('EF');
                 break;
             }
             case 5: {
-                node = this.randomNodeFrom('F');
+                node = this.randomLineFrom('FA');
                 break;
             }
         }
@@ -101,7 +144,7 @@ export class Ragnatela extends Phaser.GameObjects.Image {
         }
     }
 
-    private randomNodeFrom(ramo: string) {
+    private randomLineFrom(ramo: string) {
         let giro = Math.floor(Math.random() * this[ramo].length);
         return this[ramo][giro];
     }
@@ -359,10 +402,18 @@ export class Ragnatela extends Phaser.GameObjects.Image {
     addToRandomLine(texture: string) {
         let node = this.getRandomNode();
         node.insect = true;
-        this.scene.add.image(node.line.x,node.line.y, texture);
+        this.scene.add.image(node.point.x, node.point.y, texture);
     }
 
-    hasInsect(webNode: WebNode) {
-        return this[webNode.ramo][webNode.giro].insect;
+    hasInsectBetween(from: WebNode, to: WebNode) {
+        if (from.ramo === 'Z' || from.ramo === to.ramo) {
+            return false;
+        } else {
+            if (this[from.ramo+to.ramo]) {
+                return this[from.ramo+to.ramo][from.giro].insect;
+            } else {
+                return this[to.ramo+from.ramo][from.giro].insect;
+            }
+        }
     }
 }
