@@ -69,8 +69,7 @@ export class GameScene extends Phaser.Scene {
                 this.alreadyDown = true;
                 console.log('X:' + this.input.activePointer.x);
                 console.log('Y:' + this.input.activePointer.y);
-                let line = this.ragnatela.getRandomLine();
-                this.add.image(line.x,line.y, 'tipula');
+                this.ragnatela.addToRandomLine('tipula');
                 // var circle = new Phaser.Geom.Circle(line.x, line.y, 5);
                 // this.graphics.fillCircleShape(circle);
             }

@@ -65,34 +65,45 @@ export class Ragnatela extends Phaser.GameObjects.Image {
         return new WebNode('Z', 0);
     }
 
-    getRandomLine() {
+    private getRandomNode() {
         let ramo = Math.floor(Math.random() * 6);
+        let node;
         switch (ramo) {
             case 0: {
-                let giro = Math.floor(Math.random() * this.A.length);
-                return this.A[giro].line;
+                node = this.randomNodeFrom('A');
+                break;
             }
             case 1: {
-                let giro = Math.floor(Math.random() * this.B.length);
-                return this.B[giro].line;
+                node = this.randomNodeFrom('B');
+                break;
             }
             case 2: {
-                let giro = Math.floor(Math.random() * this.C.length);
-                return this.C[giro].line;
+                node = this.randomNodeFrom('C');
+                break;
             }
             case 3: {
-                let giro = Math.floor(Math.random() * this.D.length);
-                return this.D[giro].line;
+                node = this.randomNodeFrom('D');
+                break;
             }
             case 4: {
-                let giro = Math.floor(Math.random() * this.E.length);
-                return this.E[giro].line;
+                node = this.randomNodeFrom('E');
+                break;
             }
             case 5: {
-                let giro = Math.floor(Math.random() * this.F.length);
-                return this.F[giro].line;
+                node = this.randomNodeFrom('F');
+                break;
             }
         }
+        if (node.broken || node.insect) {
+            return this.getRandomNode();
+        } else {
+            return node;
+        }
+    }
+
+    private randomNodeFrom(ramo: string) {
+        let giro = Math.floor(Math.random() * this[ramo].length);
+        return this[ramo][giro];
     }
 
     getPoint(nodo: { ramo: string; giro: number }) {
@@ -343,5 +354,11 @@ export class Ragnatela extends Phaser.GameObjects.Image {
         } else {
             return new WebNode('Z', 0);
         }
+    }
+
+    addToRandomLine(texture: string) {
+        let node = this.getRandomNode();
+        node.insect = true;
+        this.scene.add.image(node.line.x,node.line.y, texture);
     }
 }
