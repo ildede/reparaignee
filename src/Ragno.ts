@@ -23,16 +23,19 @@ export class Ragno extends Phaser.Physics.Arcade.Image {
 
     updatePositionTo(webNode: WebNode) {
         this.movingSound.play();
-        let speed = 180;
         if (this.ragnatela.hasInsectBetween(this.myWebNode, webNode)) {
             console.log('INSETTI, non mi muovo');
         } else {
+            let currentPoint = this.ragnatela.getPoint(this.myWebNode);
+            let pointToMoveTo = this.ragnatela.getPoint(webNode);
+            this.rotation = Phaser.Math.Angle.BetweenPoints(currentPoint, pointToMoveTo);
+            console.log(this.rotation);
+            let speed = 180;
             if (this.ragnatela.isBrokenBetween(this.myWebNode, webNode)) {
                 speed *= .4;
                 this.ragnatela.repairBetween(this.myWebNode, webNode);
             }
-            let point = this.ragnatela.getPoint(webNode);
-            this.targetNode = new Phaser.Math.Vector2(point.x, point.y);
+            this.targetNode = new Phaser.Math.Vector2(pointToMoveTo.x, pointToMoveTo.y);
             this.scene.physics.moveToObject(this, this.targetNode, speed);
             this.myWebNode = webNode;
         }

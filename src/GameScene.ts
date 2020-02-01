@@ -53,7 +53,7 @@ export class GameScene extends Phaser.Scene {
             loop: true,
         });
         this.sound.play('birds', {
-            volume: .3,
+            volume: .6,
             loop: true,
         });
         this.ragnatela = new Ragnatela(this, 'background');
