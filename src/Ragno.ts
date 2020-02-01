@@ -3,34 +3,35 @@ import {Ragnatela} from "./Ragnatela";
 import {WebNode} from "./WebNode";
 import Scene = Phaser.Scene;
 
-export class Ragno extends Phaser.GameObjects.Image {
+export class Ragno extends Phaser.Physics.Arcade.Image {
 
     private myWebNode: WebNode;
     private ragnatela: Ragnatela;
+    private targetNode: Phaser.Math.Vector2;
 
     constructor(scene: Scene, texture: string, ragnatela: Ragnatela) {
         super(scene, 0, 0, texture);
         this.ragnatela = ragnatela;
         this.myWebNode = this.ragnatela.getStartingNode();
-        this.updatePosition();
+        this.targetNode = null;
         scene.add.existing(this);
-    }
-
-    updatePosition() {
-        let point = this.ragnatela.getPoint(this.myWebNode);
-        this.setPosition(point.x, point.y);
+        scene.physics.add.existing(this);
+        this.updatePositionTo(this.myWebNode);
     }
 
     updatePositionTo(webNode: WebNode) {
+        let speed = 180;
         if (this.ragnatela.hasInsectBetween(this.myWebNode, webNode)) {
             console.log('INSETTI, non mi muovo');
         } else {
             if (this.ragnatela.isBrokenBetween(this.myWebNode, webNode)) {
+                speed *= .4;
                 this.ragnatela.repairBetween(this.myWebNode, webNode);
             }
+            let point = this.ragnatela.getPoint(webNode);
+            this.targetNode = new Phaser.Math.Vector2(point.x, point.y);
+            this.scene.physics.moveToObject(this, this.targetNode, speed);
             this.myWebNode = webNode;
-            this.updatePosition();
-
         }
     }
 
@@ -72,5 +73,20 @@ export class Ragno extends Phaser.GameObjects.Image {
     upLeft() {
         let webNode = this.ragnatela.getNodeOnTopLeft(this.myWebNode);
         this.updatePositionTo(webNode);
+    }
+
+    updatePosition() {
+        var distance = Phaser.Math.Distance.Between(this.x, this.y, this.targetNode.x, this.targetNode.y);
+        //  4 is our distance tolerance, i.e. how close the source can get to the target
+        //  before it is considered as being there. The faster it moves, the more tolerance is required.
+        if (distance < 4) {
+            this.body.reset(this.targetNode.x, this.targetNode.y);
+            this.targetNode = null;
+        }
+    }
+
+    isMoving() {
+        // @ts-ignore
+        return this.targetNode && this.body.speed > 0;
     }
 }

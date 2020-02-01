@@ -21,7 +21,6 @@ export class GameScene extends Phaser.Scene {
     private downLeft: Phaser.Input.Keyboard.Key;
     private left: Phaser.Input.Keyboard.Key;
     private upLeft: Phaser.Input.Keyboard.Key;
-    graphics: Phaser.GameObjects.Graphics;
     private alreadyDown: boolean;
 
     constructor() {
@@ -50,54 +49,48 @@ export class GameScene extends Phaser.Scene {
         this.left = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         this.upLeft = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
         this.alreadyDown = false;
-        this.graphics = this.add.graphics({
-            lineStyle: {
-                width: 1,
-                color: 0x000000,
-                alpha: 1
-            },
-            fillStyle: {
-                color: 0x000000,
-                alpha: 1
-            }
-        });
     }
 
     update() {
-        if (this.input.activePointer.isDown) {
-            if (!this.alreadyDown) {
-                this.alreadyDown = true;
-                console.log('X:' + this.input.activePointer.x);
-                console.log('Y:' + this.input.activePointer.y);
-                this.ragnatela.addToRandomLine('tipula');
-            }
+        if (this.ragno.isMoving()) {
+            this.ragno.updatePosition();
         } else {
-            this.alreadyDown = false;
-        }
+            if (this.input.activePointer.isDown) {
+                if (!this.alreadyDown) {
+                    this.alreadyDown = true;
+                    console.log('X:' + this.input.activePointer.x);
+                    console.log('Y:' + this.input.activePointer.y);
+                    this.ragnatela.addToRandomLine('tipula');
+                }
+            } else {
+                this.alreadyDown = false;
+            }
 
-        if (Phaser.Input.Keyboard.JustDown(this.up)) {
-            this.ragno.up();
-        }
-        if (Phaser.Input.Keyboard.JustDown(this.upRight)) {
-            this.ragno.upRight();
-        }
-        if (Phaser.Input.Keyboard.JustDown(this.right)) {
-            this.ragno.right();
-        }
-        if (Phaser.Input.Keyboard.JustDown(this.downRight)) {
-            this.ragno.downRight();
-        }
-        if (Phaser.Input.Keyboard.JustDown(this.down)) {
-            this.ragno.down();
-        }
-        if (Phaser.Input.Keyboard.JustDown(this.downLeft)) {
-            this.ragno.downLeft();
-        }
-        if (Phaser.Input.Keyboard.JustDown(this.left)) {
-            this.ragno.left();
-        }
-        if (Phaser.Input.Keyboard.JustDown(this.upLeft)) {
-            this.ragno.upLeft();
+            if (Phaser.Input.Keyboard.JustDown(this.up)) {
+                this.ragno.up();
+            }
+            if (Phaser.Input.Keyboard.JustDown(this.upRight)) {
+                this.ragno.upRight();
+            }
+            if (Phaser.Input.Keyboard.JustDown(this.right)) {
+                this.ragno.right();
+            }
+            if (Phaser.Input.Keyboard.JustDown(this.downRight)) {
+                this.ragno.downRight();
+            }
+            if (Phaser.Input.Keyboard.JustDown(this.down)) {
+                this.ragno.down();
+            }
+            if (Phaser.Input.Keyboard.JustDown(this.downLeft)) {
+                this.ragno.downLeft();
+            }
+            if (Phaser.Input.Keyboard.JustDown(this.left)) {
+                this.ragno.left();
+            }
+            if (Phaser.Input.Keyboard.JustDown(this.upLeft)) {
+                this.ragno.upLeft();
+            }
+
         }
     }
 }
