@@ -1,7 +1,6 @@
 import * as Phaser from "phaser";
-import Point = Phaser.Geom.Point;
-import Scene = Phaser.Scene;
 import {WebNode} from "./WebNode";
+import Point = Phaser.Geom.Point;
 
 export class Ragnatela extends Phaser.GameObjects.Image {
 
@@ -20,7 +19,7 @@ export class Ragnatela extends Phaser.GameObjects.Image {
     private EF: Array<{point: Point, insect: boolean, broken: boolean}>;
     private FA: Array<{point: Point, insect: boolean, broken: boolean}>;
 
-    constructor(scene: Scene, texture: string) {
+    constructor(scene: Phaser.Scene, texture: string) {
         super(
             scene,
             scene.scale.width/2,
@@ -108,7 +107,7 @@ export class Ragnatela extends Phaser.GameObjects.Image {
         return new WebNode('Z', 0);
     }
 
-    private getRandomNode() {
+    private getRandomLine() {
         let ramo = Math.floor(Math.random() * 6);
         let node;
         switch (ramo) {
@@ -138,7 +137,7 @@ export class Ragnatela extends Phaser.GameObjects.Image {
             }
         }
         if (node.broken || node.insect) {
-            return this.getRandomNode();
+            return this.getRandomLine();
         } else {
             return node;
         }
@@ -399,10 +398,18 @@ export class Ragnatela extends Phaser.GameObjects.Image {
         }
     }
 
-    addToRandomLine(texture: string) {
-        let node = this.getRandomNode();
-        node.insect = true;
-        this.scene.add.image(node.point.x, node.point.y, texture);
+    addToRandomLine(texture: string, graphics: Phaser.GameObjects.Graphics) {
+        let line = this.getRandomLine();
+        line.insect = true;
+        let insect = this.scene.add.image(line.point.x, line.point.y, texture);
+        this.scene.time.delayedCall(5000, this.doSomething, [insect, line, graphics], this);
+    }
+
+    doSomething(insect, line, graphics) {
+        insect.destroy();
+        line.insect = false;
+        var circle = new Phaser.Geom.Circle(line.point.x, line.point.y, 5);
+        graphics.fillCircleShape(circle);
     }
 
     hasInsectBetween(from: WebNode, to: WebNode) {

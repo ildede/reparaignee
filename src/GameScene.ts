@@ -21,7 +21,7 @@ export class GameScene extends Phaser.Scene {
     private downLeft: Phaser.Input.Keyboard.Key;
     private left: Phaser.Input.Keyboard.Key;
     private upLeft: Phaser.Input.Keyboard.Key;
-    private graphics: Phaser.GameObjects.Graphics;
+    graphics: Phaser.GameObjects.Graphics;
     private alreadyDown: boolean;
 
     constructor() {
@@ -49,7 +49,6 @@ export class GameScene extends Phaser.Scene {
         this.left = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         this.upLeft = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
         this.alreadyDown = false;
-
         this.graphics = this.add.graphics({
             lineStyle: {
                 width: 1,
@@ -69,9 +68,7 @@ export class GameScene extends Phaser.Scene {
                 this.alreadyDown = true;
                 console.log('X:' + this.input.activePointer.x);
                 console.log('Y:' + this.input.activePointer.y);
-                this.ragnatela.addToRandomLine('tipula');
-                // var circle = new Phaser.Geom.Circle(line.x, line.y, 5);
-                // this.graphics.fillCircleShape(circle);
+                this.ragnatela.addToRandomLine('tipula', this.graphics);
             }
         } else {
             this.alreadyDown = false;
