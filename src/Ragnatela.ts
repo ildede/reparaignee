@@ -402,7 +402,7 @@ export class Ragnatela extends Phaser.GameObjects.Image {
         let line = this.getRandomLine();
         line.insect = true;
         let insect = this.scene.add.image(line.point.x, line.point.y, texture);
-        this.scene.time.delayedCall(2000, this.doSomething, [insect, line], this);
+        this.scene.time.delayedCall(1500, this.doSomething, [insect, line], this);
     }
 
     doSomething(insect, line) {

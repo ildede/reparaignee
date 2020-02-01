@@ -44,11 +44,25 @@ export class GameScene extends Phaser.Scene {
         this.upRight = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
         this.right = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
         this.downRight = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C);
-        this.down = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+        this.down = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.X);
         this.downLeft = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
         this.left = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         this.upLeft = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
         this.alreadyDown = false;
+        var timer = this.time.addEvent({
+            delay: 3000,
+            callback: this.addRandomInsect,
+            args: [],
+            callbackScope: this,
+            loop: true,
+            startAt: 0,
+            timeScale: 1,
+            paused: false
+        });
+    }
+
+    addRandomInsect() {
+        this.ragnatela.addToRandomLine('tipula');
     }
 
     update() {
@@ -60,7 +74,6 @@ export class GameScene extends Phaser.Scene {
                     this.alreadyDown = true;
                     console.log('X:' + this.input.activePointer.x);
                     console.log('Y:' + this.input.activePointer.y);
-                    this.ragnatela.addToRandomLine('tipula');
                 }
             } else {
                 this.alreadyDown = false;
