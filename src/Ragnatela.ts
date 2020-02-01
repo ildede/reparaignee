@@ -5,12 +5,13 @@ import {WebNode} from "./WebNode";
 
 export class Ragnatela extends Phaser.GameObjects.Image {
 
-    A: Array<Point>;
-    B: Array<Point>;
-    C: Array<Point>;
-    D: Array<Point>;
-    E: Array<Point>;
-    F: Array<Point>;
+    private A: Array<Point>;
+    private B: Array<Point>;
+    private C: Array<Point>;
+    private D: Array<Point>;
+    private E: Array<Point>;
+    private F: Array<Point>;
+    private Z: Array<Point>;
 
     constructor(scene: Scene, texture: string) {
         super(
@@ -57,36 +58,38 @@ export class Ragnatela extends Phaser.GameObjects.Image {
             new Point(43, 89),
             new Point(34, 92),
             ];
+        this.Z = [new Point(85,73)];
     }
 
-    getNodoRandom() {
-        let ramo = Math.floor(Math.random() * 6);
-        switch (ramo) {
-            case 0: {
-                let giro = Math.floor(Math.random() * this.A.length);
-                return new WebNode('A', giro, this.A[giro]);
-            }
-            case 1: {
-                let giro = Math.floor(Math.random() * this.B.length);
-                return new WebNode('B', giro, this.B[giro]);
-            }
-            case 2: {
-                let giro = Math.floor(Math.random() * this.C.length);
-                return new WebNode('C', giro, this.C[giro]);
-            }
-            case 3: {
-                let giro = Math.floor(Math.random() * this.D.length);
-                return new WebNode('D', giro, this.D[giro]);
-            }
-            case 4: {
-                let giro = Math.floor(Math.random() * this.E.length);
-                return new WebNode('E', giro, this.E[giro]);
-            }
-            case 5: {
-                let giro = Math.floor(Math.random() * this.F.length);
-                return new WebNode('F', giro, this.F[giro]);
-            }
-        }
+    getStartingNode() {
+        return new WebNode('Z', 0, this.Z[0]);
+        // let ramo = Math.floor(Math.random() * 6);
+        // switch (ramo) {
+        //     case 0: {
+        //         let giro = Math.floor(Math.random() * this.A.length);
+        //         return new WebNode('A', giro, this.A[giro]);
+        //     }
+        //     case 1: {
+        //         let giro = Math.floor(Math.random() * this.B.length);
+        //         return new WebNode('B', giro, this.B[giro]);
+        //     }
+        //     case 2: {
+        //         let giro = Math.floor(Math.random() * this.C.length);
+        //         return new WebNode('C', giro, this.C[giro]);
+        //     }
+        //     case 3: {
+        //         let giro = Math.floor(Math.random() * this.D.length);
+        //         return new WebNode('D', giro, this.D[giro]);
+        //     }
+        //     case 4: {
+        //         let giro = Math.floor(Math.random() * this.E.length);
+        //         return new WebNode('E', giro, this.E[giro]);
+        //     }
+        //     case 5: {
+        //         let giro = Math.floor(Math.random() * this.F.length);
+        //         return new WebNode('F', giro, this.F[giro]);
+        //     }
+        // }
     }
 
     getPoint(nodo: { ramo: string; giro: number }) {
@@ -112,6 +115,9 @@ export class Ragnatela extends Phaser.GameObjects.Image {
             }
             case 'F': {
                 return new WebNode('A', webNode.giro, this.A[webNode.giro]);
+            }
+            case 'Z': {
+                return new WebNode('B', 0, this.B[0]);
             }
             default: {
                 return webNode;
@@ -139,6 +145,9 @@ export class Ragnatela extends Phaser.GameObjects.Image {
             case 'F': {
                 return webNode;
             }
+            case 'Z': {
+                return new WebNode('B', 0, this.B[0]);
+            }
             default: {
                 return webNode;
             }
@@ -165,6 +174,9 @@ export class Ragnatela extends Phaser.GameObjects.Image {
             case 'F': {
                 return this.goIn(webNode);
             }
+            case 'Z': {
+                return new WebNode('C', 0, this.C[0]);
+            }
             default: {
                 return webNode;
             }
@@ -190,6 +202,9 @@ export class Ragnatela extends Phaser.GameObjects.Image {
             }
             case 'F': {
                 return new WebNode('E', webNode.giro, this.E[webNode.giro]);
+            }
+            case 'Z': {
+                return new WebNode('D', 0, this.D[0]);
             }
             default: {
                 return webNode;
@@ -218,6 +233,9 @@ export class Ragnatela extends Phaser.GameObjects.Image {
             case 'F': {
                 return new WebNode('E', webNode.giro, this.E[webNode.giro]);
             }
+            case 'Z': {
+                return new WebNode('E', 0, this.E[0]);
+            }
             default: {
                 return webNode;
             }
@@ -243,6 +261,9 @@ export class Ragnatela extends Phaser.GameObjects.Image {
             }
             case 'F': {
                 return this.goOut(webNode);
+            }
+            case 'Z': {
+                return new WebNode('F', 0, this.F[0]);
             }
             default: {
                 return webNode;
@@ -270,6 +291,9 @@ export class Ragnatela extends Phaser.GameObjects.Image {
             case 'F': {
                 return this.goOut(webNode);
             }
+            case 'Z': {
+                return new WebNode('F', 0, this.F[0]);
+            }
             default: {
                 return webNode;
             }
@@ -296,6 +320,9 @@ export class Ragnatela extends Phaser.GameObjects.Image {
             case 'F': {
                 return webNode;
             }
+            case 'Z': {
+                return new WebNode('A', 0, this.A[0]);
+            }
             default: {
                 return webNode;
             }
@@ -308,7 +335,10 @@ export class Ragnatela extends Phaser.GameObjects.Image {
     }
 
     private goIn(webNode: WebNode) {
-        let newGiro = webNode.giro > 0 ? webNode.giro - 1 : webNode.giro;
-        return new WebNode(webNode.ramo, newGiro, this[webNode.ramo][newGiro])
+        if (webNode.giro > 0) {
+            return new WebNode(webNode.ramo, webNode.giro-1, this[webNode.ramo][webNode.giro-1])
+        } else {
+            return new WebNode('Z', 0, this.Z[0]);
+        }
     }
 }

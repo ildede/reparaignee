@@ -11,7 +11,7 @@ export class Ragno extends Phaser.GameObjects.Image {
     constructor(scene: Scene, texture: string, ragnatela: Ragnatela) {
         super(scene, 0, 0, texture);
         this.ragnatela = ragnatela;
-        this.myWebNode = this.ragnatela.getNodoRandom();
+        this.myWebNode = this.ragnatela.getStartingNode();
         this.updatePosition();
         scene.add.existing(this);
     }
