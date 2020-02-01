@@ -29,7 +29,6 @@ export class Ragno extends Phaser.Physics.Arcade.Image {
             let currentPoint = this.ragnatela.getPoint(this.myWebNode);
             let pointToMoveTo = this.ragnatela.getPoint(webNode);
             this.rotation = Phaser.Math.Angle.BetweenPoints(currentPoint, pointToMoveTo);
-            console.log(this.rotation);
             let speed = 180;
             if (this.ragnatela.isBrokenBetween(this.myWebNode, webNode)) {
                 speed *= .4;
