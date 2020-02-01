@@ -25,9 +25,12 @@ export class Ragno extends Phaser.GameObjects.Image {
         if (this.ragnatela.hasInsectBetween(this.myWebNode, webNode)) {
             console.log('INSETTI, non mi muovo');
         } else {
-            console.log('cori cori cori...');
+            if (this.ragnatela.isBrokenBetween(this.myWebNode, webNode)) {
+                this.ragnatela.repairBetween(this.myWebNode, webNode);
+            }
             this.myWebNode = webNode;
             this.updatePosition();
+
         }
     }
 

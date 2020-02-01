@@ -12,12 +12,12 @@ export class Ragnatela extends Phaser.GameObjects.Image {
     private F: Array<{point: Point}>;
     private Z: Array<{point: Point}>;
 
-    private AB: Array<{point: Point, insect: boolean, broken: boolean}>;
-    private BC: Array<{point: Point, insect: boolean, broken: boolean}>;
-    private CD: Array<{point: Point, insect: boolean, broken: boolean}>;
-    private DE: Array<{point: Point, insect: boolean, broken: boolean}>;
-    private EF: Array<{point: Point, insect: boolean, broken: boolean}>;
-    private FA: Array<{point: Point, insect: boolean, broken: boolean}>;
+    private AB: Array<{point: Point, insect: boolean, broken: boolean, sprite: Phaser.GameObjects.Image }>;
+    private BC: Array<{point: Point, insect: boolean, broken: boolean, sprite: Phaser.GameObjects.Image }>;
+    private CD: Array<{point: Point, insect: boolean, broken: boolean, sprite: Phaser.GameObjects.Image }>;
+    private DE: Array<{point: Point, insect: boolean, broken: boolean, sprite: Phaser.GameObjects.Image }>;
+    private EF: Array<{point: Point, insect: boolean, broken: boolean, sprite: Phaser.GameObjects.Image }>;
+    private FA: Array<{point: Point, insect: boolean, broken: boolean, sprite: Phaser.GameObjects.Image }>;
 
     constructor(scene: Phaser.Scene, texture: string) {
         super(
@@ -65,40 +65,40 @@ export class Ragnatela extends Phaser.GameObjects.Image {
             { point: new Point(34, 92) },
             ];
         this.AB = [
-            { point: new Point(82,58), insect: false, broken: false },
-            { point: new Point(79,51), insect: false, broken: false },
-            { point: new Point(77,45), insect: false, broken: false },
-            { point: new Point(73,35), insect: false, broken: false },
+            { point: new Point(82,58), insect: false, broken: false, sprite: null },
+            { point: new Point(79,51), insect: false, broken: false, sprite: null },
+            { point: new Point(77,45), insect: false, broken: false, sprite: null },
+            { point: new Point(73,35), insect: false, broken: false, sprite: null },
             ];
         this.BC = [
-            { point: new Point(96,62), insect: false, broken: false },
-            { point: new Point(102,53), insect: false, broken: false },
-            { point: new Point(110,47), insect: false, broken: false },
-            { point: new Point(120,40), insect: false, broken: false },
+            { point: new Point(96,62), insect: false, broken: false, sprite: null },
+            { point: new Point(102,53), insect: false, broken: false, sprite: null },
+            { point: new Point(110,47), insect: false, broken: false, sprite: null },
+            { point: new Point(120,40), insect: false, broken: false, sprite: null },
             ];
         this.CD = [
-            { point: new Point(101,73), insect: false, broken: false },
-            { point: new Point(112,75), insect: false, broken: false },
-            { point: new Point(121,76), insect: false, broken: false },
-            { point: new Point(132,77), insect: false, broken: false },
+            { point: new Point(101,73), insect: false, broken: false, sprite: null },
+            { point: new Point(112,75), insect: false, broken: false, sprite: null },
+            { point: new Point(121,76), insect: false, broken: false, sprite: null },
+            { point: new Point(132,77), insect: false, broken: false, sprite: null },
             ];
         this.DE = [
-            { point: new Point(89,88), insect: false, broken: false },
-            { point: new Point(90,99), insect: false, broken: false },
-            { point: new Point(94,109), insect: false, broken: false },
-            { point: new Point(97,115), insect: false, broken: false },
+            { point: new Point(89,88), insect: false, broken: false, sprite: null },
+            { point: new Point(90,99), insect: false, broken: false, sprite: null },
+            { point: new Point(94,109), insect: false, broken: false, sprite: null },
+            { point: new Point(97,115), insect: false, broken: false, sprite: null },
             ];
         this.EF = [
-            { point: new Point(72,87), insect: false, broken: false },
-            { point: new Point(63,95), insect: false, broken: false },
-            { point: new Point(54,106), insect: false, broken: false },
-            { point: new Point(48,111), insect: false, broken: false },
+            { point: new Point(72,87), insect: false, broken: false, sprite: null },
+            { point: new Point(63,95), insect: false, broken: false, sprite: null },
+            { point: new Point(54,106), insect: false, broken: false, sprite: null },
+            { point: new Point(48,111), insect: false, broken: false, sprite: null },
             ];
         this.FA = [
-            { point: new Point(67,70), insect: false, broken: false },
-            { point: new Point(58,69), insect: false, broken: false },
-            { point: new Point(49,67), insect: false, broken: false },
-            { point: new Point(39,67), insect: false, broken: false },
+            { point: new Point(67,70), insect: false, broken: false, sprite: null },
+            { point: new Point(58,69), insect: false, broken: false, sprite: null },
+            { point: new Point(49,67), insect: false, broken: false, sprite: null },
+            { point: new Point(39,67), insect: false, broken: false, sprite: null },
             ];
         this.Z = [{ point: new Point(85,73) }];
     }
@@ -398,22 +398,22 @@ export class Ragnatela extends Phaser.GameObjects.Image {
         }
     }
 
-    addToRandomLine(texture: string, graphics: Phaser.GameObjects.Graphics) {
+    addToRandomLine(texture: string) {
         let line = this.getRandomLine();
         line.insect = true;
         let insect = this.scene.add.image(line.point.x, line.point.y, texture);
-        this.scene.time.delayedCall(5000, this.doSomething, [insect, line, graphics], this);
+        this.scene.time.delayedCall(2000, this.doSomething, [insect, line], this);
     }
 
-    doSomething(insect, line, graphics) {
+    doSomething(insect, line) {
         insect.destroy();
         line.insect = false;
-        var circle = new Phaser.Geom.Circle(line.point.x, line.point.y, 5);
-        graphics.fillCircleShape(circle);
+        line.sprite = this.scene.add.image(line.point.x, line.point.y, 'hole');
+        line.broken = true;
     }
 
     hasInsectBetween(from: WebNode, to: WebNode) {
-        if (from.ramo === 'Z' || from.ramo === to.ramo) {
+        if (this.isMovingOnRamo(from, to)) {
             return false;
         } else {
             if (this[from.ramo+to.ramo]) {
@@ -421,6 +421,31 @@ export class Ragnatela extends Phaser.GameObjects.Image {
             } else {
                 return this[to.ramo+from.ramo][from.giro].insect;
             }
+        }
+    }
+
+    isBrokenBetween(from: WebNode, to: WebNode) {
+        if (this.isMovingOnRamo(from, to)) {
+            return false;
+        } else {
+            if (this[from.ramo+to.ramo]) {
+                return this[from.ramo+to.ramo][from.giro].broken;
+            } else {
+                return this[to.ramo+from.ramo][from.giro].broken;
+            }
+        }
+    }
+
+    private isMovingOnRamo(from: WebNode, to: WebNode) {
+        return from.ramo === 'Z' || to.ramo === 'Z' || from.ramo === to.ramo;
+    }
+    repairBetween(from: WebNode, to: WebNode) {
+        if (this[from.ramo+to.ramo]) {
+            this[from.ramo+to.ramo][from.giro].sprite.destroy();
+            this[from.ramo+to.ramo][from.giro].broken = false;
+        } else {
+            this[to.ramo+from.ramo][from.giro].sprite.destroy();
+            this[to.ramo+from.ramo][from.giro].broken = false;
         }
     }
 }

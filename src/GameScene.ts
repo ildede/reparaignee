@@ -33,6 +33,7 @@ export class GameScene extends Phaser.Scene {
         this.load.image('alberi', 'assets/sprites/alberi.png');
         this.load.image('ragno', 'assets/sprites/ragno.png');
         this.load.image('tipula', 'assets/sprites/tipula.png');
+        this.load.image('hole', 'assets/sprites/hole.png');
     }
 
     create() {
@@ -68,7 +69,7 @@ export class GameScene extends Phaser.Scene {
                 this.alreadyDown = true;
                 console.log('X:' + this.input.activePointer.x);
                 console.log('Y:' + this.input.activePointer.y);
-                this.ragnatela.addToRandomLine('tipula', this.graphics);
+                this.ragnatela.addToRandomLine('tipula');
             }
         } else {
             this.alreadyDown = false;
@@ -98,7 +99,5 @@ export class GameScene extends Phaser.Scene {
         if (Phaser.Input.Keyboard.JustDown(this.upLeft)) {
             this.ragno.upLeft();
         }
-
-
     }
 }
