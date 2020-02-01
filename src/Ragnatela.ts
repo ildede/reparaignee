@@ -62,7 +62,7 @@ export class Ragnatela extends Phaser.GameObjects.Image {
     }
 
     getStartingNode() {
-        return new WebNode('Z', 0, this.Z[0].point, this.Z[0].line);
+        return new WebNode('Z', 0);
     }
 
     getRandomLine() {
@@ -111,16 +111,16 @@ export class Ragnatela extends Phaser.GameObjects.Image {
                 return webNode;
             }
             case 'D': {
-                return new WebNode('C', webNode.giro, this.C[webNode.giro].point, this.C[webNode.giro].line);
+                return new WebNode('C', webNode.giro);
             }
             case 'E': {
                 return this.goIn(webNode);
             }
             case 'F': {
-                return new WebNode('A', webNode.giro, this.A[webNode.giro].point, this.A[webNode.giro].line);
+                return new WebNode('A', webNode.giro);
             }
             case 'Z': {
-                return new WebNode('B', 0, this.B[0].point, this.B[0].line);
+                return new WebNode('B', 0);
             }
             default: {
                 return webNode;
@@ -149,7 +149,7 @@ export class Ragnatela extends Phaser.GameObjects.Image {
                 return webNode;
             }
             case 'Z': {
-                return new WebNode('B', 0, this.B[0].point, this.B[0].line);
+                return new WebNode('B', 0);
             }
             default: {
                 return webNode;
@@ -160,7 +160,7 @@ export class Ragnatela extends Phaser.GameObjects.Image {
     getNodeOnRight(webNode: WebNode) {
         switch (webNode.ramo) {
             case 'A': {
-                return new WebNode('B', webNode.giro, this.B[webNode.giro].point, this.B[webNode.giro].line);
+                return new WebNode('B', webNode.giro);
             }
             case 'B': {
                 return webNode;
@@ -172,13 +172,13 @@ export class Ragnatela extends Phaser.GameObjects.Image {
                 return webNode;
             }
             case 'E': {
-                return new WebNode('D', webNode.giro, this.D[webNode.giro].point, this.B[webNode.giro].line);
+                return new WebNode('D', webNode.giro);
             }
             case 'F': {
                 return this.goIn(webNode);
             }
             case 'Z': {
-                return new WebNode('C', 0, this.C[0].point, this.C[0].line);
+                return new WebNode('C', 0);
             }
             default: {
                 return webNode;
@@ -192,7 +192,7 @@ export class Ragnatela extends Phaser.GameObjects.Image {
                 return this.goIn(webNode);
             }
             case 'B': {
-                return new WebNode('C', webNode.giro, this.C[webNode.giro].point, this.C[webNode.giro].line);
+                return new WebNode('C', webNode.giro);
             }
             case 'C': {
                 return webNode;
@@ -204,10 +204,10 @@ export class Ragnatela extends Phaser.GameObjects.Image {
                 return webNode;
             }
             case 'F': {
-                return new WebNode('E', webNode.giro, this.E[webNode.giro].point, this.E[webNode.giro].line);
+                return new WebNode('E', webNode.giro);
             }
             case 'Z': {
-                return new WebNode('D', 0, this.D[0].point, this.D[0].line);
+                return new WebNode('D', 0);
             }
             default: {
                 return webNode;
@@ -219,13 +219,13 @@ export class Ragnatela extends Phaser.GameObjects.Image {
     getNodeOnBottom(webNode: WebNode) {
         switch (webNode.ramo) {
             case 'A': {
-                return new WebNode('F', webNode.giro, this.F[webNode.giro].point, this.F[webNode.giro].line);
+                return new WebNode('F', webNode.giro);
             }
             case 'B': {
                 return this.goIn(webNode);
             }
             case 'C': {
-                return new WebNode('D', webNode.giro, this.D[webNode.giro].point, this.B[webNode.giro].line);
+                return new WebNode('D', webNode.giro);
             }
             case 'D': {
                 return webNode;
@@ -234,10 +234,10 @@ export class Ragnatela extends Phaser.GameObjects.Image {
                 return this.goOut(webNode);
             }
             case 'F': {
-                return new WebNode('E', webNode.giro, this.E[webNode.giro].point, this.E[webNode.giro].line);
+                return new WebNode('E', webNode.giro);
             }
             case 'Z': {
-                return new WebNode('E', 0, this.E[0].point, this.E[0].line);
+                return new WebNode('E', 0);
             }
             default: {
                 return webNode;
@@ -257,7 +257,7 @@ export class Ragnatela extends Phaser.GameObjects.Image {
                 return this.goIn(webNode);
             }
             case 'D': {
-                return new WebNode('E', webNode.giro, this.E[webNode.giro].point, this.E[webNode.giro].line);
+                return new WebNode('E', webNode.giro);
             }
             case 'E': {
                 return webNode;
@@ -266,7 +266,7 @@ export class Ragnatela extends Phaser.GameObjects.Image {
                 return this.goOut(webNode);
             }
             case 'Z': {
-                return new WebNode('F', 0, this.F[0].point, this.F[0].line);
+                return new WebNode('F', 0);
             }
             default: {
                 return webNode;
@@ -280,13 +280,13 @@ export class Ragnatela extends Phaser.GameObjects.Image {
                 return webNode;
             }
             case 'B': {
-                return new WebNode('A', webNode.giro, this.A[webNode.giro].point, this.A[webNode.giro].line);
+                return new WebNode('A', webNode.giro);
             }
             case 'C': {
                 return this.goIn(webNode);
             }
             case 'D': {
-                return new WebNode('E', webNode.giro, this.E[webNode.giro].point, this.E[webNode.giro].line);
+                return new WebNode('E', webNode.giro);
             }
             case 'E': {
                 return webNode;
@@ -295,7 +295,7 @@ export class Ragnatela extends Phaser.GameObjects.Image {
                 return this.goOut(webNode);
             }
             case 'Z': {
-                return new WebNode('F', 0, this.F[0].point, this.F[0].line);
+                return new WebNode('F', 0);
             }
             default: {
                 return webNode;
@@ -312,19 +312,19 @@ export class Ragnatela extends Phaser.GameObjects.Image {
                 return webNode;
             }
             case 'C': {
-                return new WebNode('B', webNode.giro, this.B[webNode.giro].point, this.B[webNode.giro].line);
+                return new WebNode('B', webNode.giro);
             }
             case 'D': {
                 return this.goIn(webNode);
             }
             case 'E': {
-                return new WebNode('F', webNode.giro, this.F[webNode.giro].point, this.F[webNode.giro].line);
+                return new WebNode('F', webNode.giro);
             }
             case 'F': {
                 return webNode;
             }
             case 'Z': {
-                return new WebNode('A', 0, this.A[0].point, this.A[0].line);
+                return new WebNode('A', 0);
             }
             default: {
                 return webNode;
@@ -334,14 +334,14 @@ export class Ragnatela extends Phaser.GameObjects.Image {
 
     private goOut(webNode: WebNode) {
         let newGiro = webNode.giro < 3 ? webNode.giro + 1 : webNode.giro;
-        return new WebNode(webNode.ramo, newGiro, this[webNode.ramo][newGiro].point, this[webNode.ramo][newGiro].line)
+        return new WebNode(webNode.ramo, newGiro)
     }
 
     private goIn(webNode: WebNode) {
         if (webNode.giro > 0) {
-            return new WebNode(webNode.ramo, webNode.giro-1, this[webNode.ramo][webNode.giro-1].point, this[webNode.ramo][webNode.giro-1].line)
+            return new WebNode(webNode.ramo, webNode.giro-1)
         } else {
-            return new WebNode('Z', 0, this.Z[0].point, this.Z[0].line);
+            return new WebNode('Z', 0);
         }
     }
 }
