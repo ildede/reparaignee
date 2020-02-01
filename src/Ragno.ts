@@ -8,18 +8,21 @@ export class Ragno extends Phaser.Physics.Arcade.Image {
     private myWebNode: WebNode;
     private ragnatela: Ragnatela;
     private targetNode: Phaser.Math.Vector2;
+    private movingSound: Phaser.Sound.BaseSound;
 
     constructor(scene: Scene, texture: string, ragnatela: Ragnatela) {
         super(scene, 0, 0, texture);
         this.ragnatela = ragnatela;
         this.myWebNode = this.ragnatela.getStartingNode();
         this.targetNode = null;
+        this.movingSound = this.scene.sound.add('spidermove');
         scene.add.existing(this);
         scene.physics.add.existing(this);
         this.updatePositionTo(this.myWebNode);
     }
 
     updatePositionTo(webNode: WebNode) {
+        this.movingSound.play();
         let speed = 180;
         if (this.ragnatela.hasInsectBetween(this.myWebNode, webNode)) {
             console.log('INSETTI, non mi muovo');
@@ -82,6 +85,7 @@ export class Ragno extends Phaser.Physics.Arcade.Image {
         if (distance < 4) {
             this.body.reset(this.targetNode.x, this.targetNode.y);
             this.targetNode = null;
+            this.movingSound.stop();
         }
     }
 

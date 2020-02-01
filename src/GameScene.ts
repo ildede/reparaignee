@@ -29,6 +29,9 @@ export class GameScene extends Phaser.Scene {
 
     preload() {
         this.load.audio('flycatch', 'assets/audio/flycatch.mp3');
+        this.load.audio('spidermove', 'assets/audio/spidermove.mp3');
+        this.load.audio('music', 'assets/audio/music.mp3');
+        this.load.audio('birds', 'assets/audio/birds.mp3');
         this.load.image('background', 'assets/sprites/sfondo.png');
         this.load.image('alberi', 'assets/sprites/alberi.png');
         this.load.image('ragno', 'assets/sprites/ragno.png');
@@ -37,6 +40,14 @@ export class GameScene extends Phaser.Scene {
     }
 
     create() {
+        this.sound.play('music', {
+            volume: .2,
+            loop: true,
+        });
+        this.sound.play('birds', {
+            volume: .3,
+            loop: true,
+        });
         this.ragnatela = new Ragnatela(this, 'background');
         this.add.image(this.scale.width/2,this.scale.height/2, 'alberi');
         this.ragno = new Ragno(this, 'ragno', this.ragnatela);
