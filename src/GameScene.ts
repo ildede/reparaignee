@@ -32,6 +32,7 @@ export class GameScene extends Phaser.Scene {
         this.load.image('background', 'assets/sprites/sfondo.png');
         this.load.image('alberi', 'assets/sprites/alberi.png');
         this.load.image('ragno', 'assets/sprites/ragno.png');
+        this.load.image('tipula', 'assets/sprites/tipula.png');
     }
 
     create() {
@@ -69,8 +70,9 @@ export class GameScene extends Phaser.Scene {
                 console.log('X:' + this.input.activePointer.x);
                 console.log('Y:' + this.input.activePointer.y);
                 let line = this.ragnatela.getRandomLine();
-                var circle = new Phaser.Geom.Circle(line.x, line.y, 5);
-                this.graphics.fillCircleShape(circle);
+                this.add.image(line.x,line.y, 'tipula');
+                // var circle = new Phaser.Geom.Circle(line.x, line.y, 5);
+                // this.graphics.fillCircleShape(circle);
             }
         } else {
             this.alreadyDown = false;
