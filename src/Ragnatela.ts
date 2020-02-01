@@ -93,123 +93,222 @@ export class Ragnatela extends Phaser.GameObjects.Image {
         return this[nodo.ramo][nodo.giro];
     }
 
-    getNodeOnLeft(webNode: WebNode) {
-        if (webNode.ramo === 'A') {
-            let newGiro = Ragnatela.goOut(webNode);
-            return new WebNode('A', newGiro, this.A[newGiro]);
-        } else
-        if (webNode.ramo === 'B') {
-            return new WebNode('A', webNode.giro, this.A[webNode.giro]);
-        } else
-        if (webNode.ramo === 'C') {
-            let newGiro = Ragnatela.goIn(webNode);
-            return new WebNode('C', newGiro, this.C[newGiro]);
-        } else
-        if (webNode.ramo === 'D') {
-            let newGiro = Ragnatela.goIn(webNode);
-            return new WebNode('D', newGiro, this.D[newGiro]);
-        } else
-        if (webNode.ramo === 'E') {
-            return new WebNode('F', webNode.giro, this.F[webNode.giro]);
-        } else
-        if (webNode.ramo === 'F') {
-            let newGiro = Ragnatela.goOut(webNode);
-            return new WebNode('F', newGiro, this.F[newGiro]);
-        }
-    }
-
-    getNodeOnRight(webNode: WebNode) {
-        if (webNode.ramo === 'A') {
-            return new WebNode('B', webNode.giro, this.B[webNode.giro]);
-        } else
-        if (webNode.ramo === 'B') {
-            return new WebNode('C', webNode.giro, this.C[webNode.giro]);
-        } else
-        if (webNode.ramo === 'C') {
-            let newGiro = Ragnatela.goOut(webNode);
-            return new WebNode('C', newGiro, this.C[newGiro]);
-        } else
-        if (webNode.ramo === 'D') {
-            let newGiro = Ragnatela.goOut(webNode);
-            return new WebNode('D', newGiro, this.D[newGiro]);
-        } else
-        if (webNode.ramo === 'E') {
-            return new WebNode('D', webNode.giro, this.D[webNode.giro]);
-        } else
-        if (webNode.ramo === 'F') {
-            let newGiro = Ragnatela.goIn(webNode);
-            return new WebNode('F', newGiro, this.F[newGiro]);
-        }
-    }
-
     getNodeOnTop(webNode: WebNode) {
-        if (webNode.ramo === 'A') {
-            let newGiro = Ragnatela.goOut(webNode);
-            return new WebNode('A', newGiro, this.A[newGiro]);
-        } else
-        if (webNode.ramo === 'B') {
-            let newGiro = Ragnatela.goOut(webNode);
-            return new WebNode('B', newGiro, this.B[newGiro]);
-        } else
-        if (webNode.ramo === 'C') {
-            return new WebNode('B', webNode.giro, this.B[webNode.giro]);
-        } else
-        if (webNode.ramo === 'D') {
-            return new WebNode('C', webNode.giro, this.C[webNode.giro]);
-        } else
-        if (webNode.ramo === 'E') {
-            let newGiro = Ragnatela.goIn(webNode);
-            return new WebNode('E', newGiro, this.E[newGiro]);
-        } else
-        if (webNode.ramo === 'F') {
-            return new WebNode('A', webNode.giro, this.A[webNode.giro]);
-        }
-    }
-
-    getNodeOnBottom(webNode: WebNode) {
-        if (webNode.ramo === 'A') {
-            return new WebNode('F', webNode.giro, this.F[webNode.giro]);
-        } else
-        if (webNode.ramo === 'B') {
-            let newGiro = Ragnatela.goIn(webNode);
-            return new WebNode('B', newGiro, this.B[newGiro]);
-        } else
-        if (webNode.ramo === 'C') {
-            return new WebNode('D', webNode.giro, this.D[webNode.giro]);
-        } else
-        if (webNode.ramo === 'D') {
-            return new WebNode('E', webNode.giro, this.E[webNode.giro]);
-        } else
-        if (webNode.ramo === 'E') {
-            let newGiro = Ragnatela.goOut(webNode);
-            return new WebNode('E', newGiro, this.E[newGiro]);
-        } else
-        if (webNode.ramo === 'F') {
-            return new WebNode('E', webNode.giro, this.E[webNode.giro]);
+        switch (webNode.ramo) {
+            case 'A': {
+                return webNode;
+            }
+            case 'B': {
+                return this.goOut(webNode);
+            }
+            case 'C': {
+                return webNode;
+            }
+            case 'D': {
+                return new WebNode('C', webNode.giro, this.C[webNode.giro]);
+            }
+            case 'E': {
+                return this.goIn(webNode);
+            }
+            case 'F': {
+                return new WebNode('A', webNode.giro, this.A[webNode.giro]);
+            }
+            default: {
+                return webNode;
+            }
         }
     }
 
     getNodeOnTopRight(webNode: WebNode) {
-        return undefined;
+        switch (webNode.ramo) {
+            case 'A': {
+                return webNode;
+            }
+            case 'B': {
+                return this.goOut(webNode);
+            }
+            case 'C': {
+                return this.goOut(webNode);
+            }
+            case 'D': {
+                return webNode;
+            }
+            case 'E': {
+                return this.goIn(webNode);
+            }
+            case 'F': {
+                return webNode;
+            }
+            default: {
+                return webNode;
+            }
+        }
+    }
+
+    getNodeOnRight(webNode: WebNode) {
+        switch (webNode.ramo) {
+            case 'A': {
+                return new WebNode('B', webNode.giro, this.B[webNode.giro]);
+            }
+            case 'B': {
+                return webNode;
+            }
+            case 'C': {
+                return this.goOut(webNode);
+            }
+            case 'D': {
+                return webNode;
+            }
+            case 'E': {
+                return new WebNode('D', webNode.giro, this.D[webNode.giro]);
+            }
+            case 'F': {
+                return this.goIn(webNode);
+            }
+            default: {
+                return webNode;
+            }
+        }
     }
 
     getNodeOnBottomRight(webNode: WebNode) {
-        return undefined;
+        switch (webNode.ramo) {
+            case 'A': {
+                return this.goIn(webNode);
+            }
+            case 'B': {
+                return new WebNode('C', webNode.giro, this.C[webNode.giro]);
+            }
+            case 'C': {
+                return webNode;
+            }
+            case 'D': {
+                return this.goOut(webNode);
+            }
+            case 'E': {
+                return webNode;
+            }
+            case 'F': {
+                return new WebNode('E', webNode.giro, this.E[webNode.giro]);
+            }
+            default: {
+                return webNode;
+            }
+        }
+
+    }
+
+    getNodeOnBottom(webNode: WebNode) {
+        switch (webNode.ramo) {
+            case 'A': {
+                return new WebNode('F', webNode.giro, this.F[webNode.giro]);
+            }
+            case 'B': {
+                return this.goIn(webNode);
+            }
+            case 'C': {
+                return new WebNode('D', webNode.giro, this.D[webNode.giro]);
+            }
+            case 'D': {
+                return webNode;
+            }
+            case 'E': {
+                return this.goOut(webNode);
+            }
+            case 'F': {
+                return new WebNode('E', webNode.giro, this.E[webNode.giro]);
+            }
+            default: {
+                return webNode;
+            }
+        }
     }
 
     getNodeOnBottomLeft(webNode: WebNode) {
-        return undefined;
+        switch (webNode.ramo) {
+            case 'A': {
+                return webNode;
+            }
+            case 'B': {
+                return this.goIn(webNode);
+            }
+            case 'C': {
+                return this.goIn(webNode);
+            }
+            case 'D': {
+                return new WebNode('E', webNode.giro, this.E[webNode.giro]);
+            }
+            case 'E': {
+                return webNode;
+            }
+            case 'F': {
+                return this.goOut(webNode);
+            }
+            default: {
+                return webNode;
+            }
+        }
+    }
+
+    getNodeOnLeft(webNode: WebNode) {
+        switch (webNode.ramo) {
+            case 'A': {
+                return webNode;
+            }
+            case 'B': {
+                return new WebNode('A', webNode.giro, this.A[webNode.giro]);
+            }
+            case 'C': {
+                return this.goIn(webNode);
+            }
+            case 'D': {
+                return new WebNode('E', webNode.giro, this.E[webNode.giro]);
+            }
+            case 'E': {
+                return webNode;
+            }
+            case 'F': {
+                return this.goOut(webNode);
+            }
+            default: {
+                return webNode;
+            }
+        }
     }
 
     getNodeOnTopLeft(webNode: WebNode) {
-        return undefined;
+        switch (webNode.ramo) {
+            case 'A': {
+                return this.goOut(webNode);
+            }
+            case 'B': {
+                return webNode;
+            }
+            case 'C': {
+                return new WebNode('B', webNode.giro, this.B[webNode.giro]);
+            }
+            case 'D': {
+                return this.goIn(webNode);
+            }
+            case 'E': {
+                return new WebNode('F', webNode.giro, this.F[webNode.giro]);
+            }
+            case 'F': {
+                return webNode;
+            }
+            default: {
+                return webNode;
+            }
+        }
     }
 
-    private static goOut(webNode: WebNode) {
-        return webNode.giro < 3 ? webNode.giro + 1 : webNode.giro;
+    private goOut(webNode: WebNode) {
+        let newGiro = webNode.giro < 3 ? webNode.giro + 1 : webNode.giro;
+        return new WebNode(webNode.ramo, newGiro, this[webNode.ramo][newGiro])
     }
 
-    private static goIn(webNode: WebNode) {
-        return webNode.giro > 0 ? webNode.giro - 1 : webNode.giro;
+    private goIn(webNode: WebNode) {
+        let newGiro = webNode.giro > 0 ? webNode.giro - 1 : webNode.giro;
+        return new WebNode(webNode.ramo, newGiro, this[webNode.ramo][newGiro])
     }
 }

@@ -6,58 +6,61 @@ import Scene = Phaser.Scene;
 export class Ragno extends Phaser.GameObjects.Image {
 
     private myWebNode: WebNode;
-    private ragantela: Ragnatela;
+    private ragnatela: Ragnatela;
 
     constructor(scene: Scene, texture: string, ragnatela: Ragnatela) {
         super(scene, 0, 0, texture);
-        this.ragantela = ragnatela;
-        this.myWebNode = ragnatela.getNodoRandom();
+        this.ragnatela = ragnatela;
+        this.myWebNode = this.ragnatela.getNodoRandom();
         this.updatePosition();
         scene.add.existing(this);
     }
 
     updatePosition() {
-        let point = this.ragantela.getPoint(this.myWebNode);
+        console.log('will update to position of node', this.myWebNode);
+        let point = this.ragnatela.getPoint(this.myWebNode);
         this.setPosition(point.x, point.y);
     }
 
     up() {
-        this.myWebNode = this.ragantela.getNodeOnTop(this.myWebNode);
+        console.log('actual node', this.myWebNode);
+        this.myWebNode = <WebNode>this.ragnatela.getNodeOnTop(this.myWebNode);
+        console.log('noew node from ragnatela', this.myWebNode);
         this.updatePosition();
     }
 
     upRight() {
-        this.myWebNode = this.ragantela.getNodeOnTopRight(this.myWebNode);
+        this.myWebNode = <WebNode>this.ragnatela.getNodeOnTopRight(this.myWebNode);
         this.updatePosition();
     }
 
     right() {
-        this.myWebNode = this.ragantela.getNodeOnRight(this.myWebNode);
+        this.myWebNode = <WebNode>this.ragnatela.getNodeOnRight(this.myWebNode);
         this.updatePosition();
     }
 
     downRight() {
-        this.myWebNode = this.ragantela.getNodeOnBottomRight(this.myWebNode);
+        this.myWebNode = <WebNode>this.ragnatela.getNodeOnBottomRight(this.myWebNode);
         this.updatePosition();
     }
 
     down() {
-        this.myWebNode = this.ragantela.getNodeOnBottom(this.myWebNode);
+        this.myWebNode = <WebNode>this.ragnatela.getNodeOnBottom(this.myWebNode);
         this.updatePosition();
     }
 
     downLeft() {
-        this.myWebNode = this.ragantela.getNodeOnBottomLeft(this.myWebNode);
+        this.myWebNode = <WebNode>this.ragnatela.getNodeOnBottomLeft(this.myWebNode);
         this.updatePosition();
     }
 
     left() {
-        this.myWebNode = this.ragantela.getNodeOnLeft(this.myWebNode);
+        this.myWebNode = <WebNode>this.ragnatela.getNodeOnLeft(this.myWebNode);
         this.updatePosition();
     }
 
     upLeft() {
-        this.myWebNode = this.ragantela.getNodeOnTopLeft(this.myWebNode);
+        this.myWebNode = <WebNode>this.ragnatela.getNodeOnTopLeft(this.myWebNode);
         this.updatePosition();
     }
 }
