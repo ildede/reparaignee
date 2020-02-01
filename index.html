@@ -4,17 +4,19 @@
     <meta charset="UTF-8">
     <title>Typeplay</title>
     <style>
-        html,
-        body,
-        canvas {
-            margin: 0 !important;
-            padding: 0 !important;
-            overflow: hidden !important;
+        .container {
+            display: flex;
+            justify-content: center;
+        }
+        .center {
+            width: 824px;
         }
     </style>
 </head>
 <body>
-    <div id="content"></div>
+    <div class="container">
+        <div id="game" class="center"></div>
+    </div>
     <script src="vendors.app.bundle.js"></script>
     <script src="app.bundle.js"></script>
 </body>
