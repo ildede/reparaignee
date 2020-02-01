@@ -7,9 +7,9 @@ const gameConfig: Phaser.Types.Core.GameConfig = {
     type: Phaser.AUTO,
     zoom: 1,
     scale: {
-        zoom: 5,
-        width: 165,
-        height: 165,
+        zoom: 2,
+        width: 412,
+        height: 412,
     },
 
     render: {

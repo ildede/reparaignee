@@ -1,21 +1,22 @@
 import * as Phaser from "phaser";
-import {Ragnatela} from "./Ragnatela";
 import {WebNode} from "./WebNode";
+import {RagnatelaMidRes} from "./RagnatelaMidRes";
 import Scene = Phaser.Scene;
 
 export class Ragno extends Phaser.Physics.Arcade.Image {
 
     private myWebNode: WebNode;
-    private ragnatela: Ragnatela;
+    private ragnatela: RagnatelaMidRes;
     private targetNode: Phaser.Math.Vector2;
     private movingSound: Phaser.Sound.BaseSound;
 
-    constructor(scene: Scene, texture: string, ragnatela: Ragnatela) {
+    constructor(scene: Scene, texture: string, ragnatela: RagnatelaMidRes) {
         super(scene, 0, 0, texture);
         this.ragnatela = ragnatela;
         this.myWebNode = this.ragnatela.getStartingNode();
         this.targetNode = null;
         this.movingSound = this.scene.sound.add('spidermove');
+        this.setDepth(10);
         scene.add.existing(this);
         scene.physics.add.existing(this);
         this.updatePositionTo(this.myWebNode);

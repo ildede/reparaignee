@@ -1,6 +1,6 @@
 import * as Phaser from "phaser";
 import {Ragno} from "./Ragno";
-import {Ragnatela} from "./Ragnatela";
+import {RagnatelaMidRes} from "./RagnatelaMidRes";
 
 const sceneConfig: Phaser.Types.Scenes.SettingsConfig = {
     active: true,
@@ -12,7 +12,7 @@ export class GameScene extends Phaser.Scene {
 
     private cursorKeys: Phaser.Types.Input.Keyboard.CursorKeys;
     private ragno: Ragno;
-    private ragnatela: Ragnatela;
+    private ragnatela: RagnatelaMidRes;
     private up1: Phaser.Input.Keyboard.Key;
     private upRight1: Phaser.Input.Keyboard.Key;
     private right1: Phaser.Input.Keyboard.Key;
@@ -40,10 +40,10 @@ export class GameScene extends Phaser.Scene {
         this.load.audio('spidermove', 'assets/audio/spidermove.mp3');
         this.load.audio('music', 'assets/audio/music.mp3');
         this.load.audio('birds', 'assets/audio/birds.mp3');
-        this.load.image('background', 'assets/sprites/sfondo.png');
-        this.load.image('alberi', 'assets/sprites/alberi.png');
-        this.load.image('ragno', 'assets/sprites/ragno.png');
-        this.load.image('tipula', 'assets/sprites/tipula.png');
+        this.load.image('ragnatela', 'assets/sprites/ragnatelamidres.png');
+        this.load.image('alberi', 'assets/sprites/alberimidres.png');
+        this.load.image('ragno', 'assets/sprites/ragnomidres.png');
+        this.load.image('tipula', 'assets/sprites/tipulamidres.png');
         this.load.image('hole', 'assets/sprites/hole.png');
     }
 
@@ -56,7 +56,7 @@ export class GameScene extends Phaser.Scene {
             volume: .6,
             loop: true,
         });
-        this.ragnatela = new Ragnatela(this, 'background');
+        this.ragnatela = new RagnatelaMidRes(this, 'ragnatela');
         this.add.image(this.scale.width/2,this.scale.height/2, 'alberi');
         this.ragno = new Ragno(this, 'ragno', this.ragnatela);
         this.cursorKeys = this.input.keyboard.createCursorKeys();
