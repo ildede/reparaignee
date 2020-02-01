@@ -361,4 +361,8 @@ export class Ragnatela extends Phaser.GameObjects.Image {
         node.insect = true;
         this.scene.add.image(node.line.x,node.line.y, texture);
     }
+
+    hasInsect(webNode: WebNode) {
+        return this[webNode.ramo][webNode.giro].insect;
+    }
 }
