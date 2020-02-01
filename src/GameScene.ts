@@ -13,14 +13,22 @@ export class GameScene extends Phaser.Scene {
     private cursorKeys: Phaser.Types.Input.Keyboard.CursorKeys;
     private ragno: Ragno;
     private ragnatela: Ragnatela;
-    private up: Phaser.Input.Keyboard.Key;
-    private upRight: Phaser.Input.Keyboard.Key;
-    private right: Phaser.Input.Keyboard.Key;
-    private downRight: Phaser.Input.Keyboard.Key;
-    private down: Phaser.Input.Keyboard.Key;
-    private downLeft: Phaser.Input.Keyboard.Key;
-    private left: Phaser.Input.Keyboard.Key;
-    private upLeft: Phaser.Input.Keyboard.Key;
+    private up1: Phaser.Input.Keyboard.Key;
+    private upRight1: Phaser.Input.Keyboard.Key;
+    private right1: Phaser.Input.Keyboard.Key;
+    private downRight1: Phaser.Input.Keyboard.Key;
+    private down1: Phaser.Input.Keyboard.Key;
+    private downLeft1: Phaser.Input.Keyboard.Key;
+    private left1: Phaser.Input.Keyboard.Key;
+    private upLeft1: Phaser.Input.Keyboard.Key;
+    private up2: Phaser.Input.Keyboard.Key;
+    private upRight2: Phaser.Input.Keyboard.Key;
+    private right2: Phaser.Input.Keyboard.Key;
+    private downRight2: Phaser.Input.Keyboard.Key;
+    private down2: Phaser.Input.Keyboard.Key;
+    private downLeft2: Phaser.Input.Keyboard.Key;
+    private left2: Phaser.Input.Keyboard.Key;
+    private upLeft2: Phaser.Input.Keyboard.Key;
     private alreadyDown: boolean;
 
     constructor() {
@@ -52,22 +60,22 @@ export class GameScene extends Phaser.Scene {
         this.add.image(this.scale.width/2,this.scale.height/2, 'alberi');
         this.ragno = new Ragno(this, 'ragno', this.ragnatela);
         this.cursorKeys = this.input.keyboard.createCursorKeys();
-        // this.up = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
-        // this.upRight = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
-        // this.right = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
-        // this.downRight = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C);
-        // this.down = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.X);
-        // this.downLeft = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
-        // this.left = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
-        // this.upLeft = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
-        this.up = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.EIGHT);
-        this.upRight = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.NINE);
-        this.right = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SIX);
-        this.downRight = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.THREE);
-        this.down = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.TWO);
-        this.downLeft = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ONE);
-        this.left = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.FOUR);
-        this.upLeft = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SEVEN);
+        this.up1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+        this.upRight1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
+        this.right1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+        this.downRight1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C);
+        this.down1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.X);
+        this.downLeft1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
+        this.left1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+        this.upLeft1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
+        this.up2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.EIGHT);
+        this.upRight2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.NINE);
+        this.right2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SIX);
+        this.downRight2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.THREE);
+        this.down2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.TWO);
+        this.downLeft2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ONE);
+        this.left2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.FOUR);
+        this.upLeft2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SEVEN);
         this.alreadyDown = false;
         var timer = this.time.addEvent({
             delay: 3000,
@@ -104,28 +112,28 @@ export class GameScene extends Phaser.Scene {
                 this.alreadyDown = false;
             }
 
-            if (Phaser.Input.Keyboard.JustDown(this.up)) {
+            if (Phaser.Input.Keyboard.JustDown(this.up1) || Phaser.Input.Keyboard.JustDown(this.up2)) {
                 this.ragno.up();
             }
-            if (Phaser.Input.Keyboard.JustDown(this.upRight)) {
+            if (Phaser.Input.Keyboard.JustDown(this.upRight1) || Phaser.Input.Keyboard.JustDown(this.upRight2)) {
                 this.ragno.upRight();
             }
-            if (Phaser.Input.Keyboard.JustDown(this.right)) {
+            if (Phaser.Input.Keyboard.JustDown(this.right1) || Phaser.Input.Keyboard.JustDown(this.right2)) {
                 this.ragno.right();
             }
-            if (Phaser.Input.Keyboard.JustDown(this.downRight)) {
+            if (Phaser.Input.Keyboard.JustDown(this.downRight1) || Phaser.Input.Keyboard.JustDown(this.downRight2)) {
                 this.ragno.downRight();
             }
-            if (Phaser.Input.Keyboard.JustDown(this.down)) {
+            if (Phaser.Input.Keyboard.JustDown(this.down1) || Phaser.Input.Keyboard.JustDown(this.down2)) {
                 this.ragno.down();
             }
-            if (Phaser.Input.Keyboard.JustDown(this.downLeft)) {
+            if (Phaser.Input.Keyboard.JustDown(this.downLeft1) || Phaser.Input.Keyboard.JustDown(this.downLeft2)) {
                 this.ragno.downLeft();
             }
-            if (Phaser.Input.Keyboard.JustDown(this.left)) {
+            if (Phaser.Input.Keyboard.JustDown(this.left1) || Phaser.Input.Keyboard.JustDown(this.left2)) {
                 this.ragno.left();
             }
-            if (Phaser.Input.Keyboard.JustDown(this.upLeft)) {
+            if (Phaser.Input.Keyboard.JustDown(this.upLeft1) || Phaser.Input.Keyboard.JustDown(this.upLeft2)) {
                 this.ragno.upLeft();
             }
 
