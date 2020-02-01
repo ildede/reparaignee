@@ -16,61 +16,49 @@ export class Ragno extends Phaser.GameObjects.Image {
         this.ragantela = ragnatela;
     }
 
+    updatePosition() {
+        let point = this.ragantela.getPoint(this.nodoAttuale);
+        this.setPosition(point.x, point.y);
+    }
+
     left() {
         if (this.nodoAttuale.ramo === 'A') {
             this.nodoAttuale = {
                 giro: this.nodoAttuale.giro < 3 ? this.nodoAttuale.giro + 1 : this.nodoAttuale.giro,
                 ramo: 'A'
             };
-            let nodo = this.ragantela.getNodo(this.nodoAttuale);
-            this.setPosition(nodo.x, nodo.y);
-            return;
-        }
+        } else
         if (this.nodoAttuale.ramo === 'B') {
             this.nodoAttuale = {
                 giro: this.nodoAttuale.giro,
                 ramo: 'A'
             };
-            let nodo = this.ragantela.getNodo(this.nodoAttuale);
-            this.setPosition(nodo.x, nodo.y);
-            return;
-        }
+        } else
         if (this.nodoAttuale.ramo === 'C') {
             this.nodoAttuale = {
                 giro: this.nodoAttuale.giro,
                 ramo: 'B'
             };
-            let nodo = this.ragantela.getNodo(this.nodoAttuale);
-            this.setPosition(nodo.x, nodo.y);
-            return;
-        }
+        } else
         if (this.nodoAttuale.ramo === 'D') {
             this.nodoAttuale = {
                 giro: this.nodoAttuale.giro > 0 ? this.nodoAttuale.giro - 1 : this.nodoAttuale.giro,
                 ramo: 'D'
             };
-            let nodo = this.ragantela.getNodo(this.nodoAttuale);
-            this.setPosition(nodo.x, nodo.y);
-            return;
-        }
+        } else
         if (this.nodoAttuale.ramo === 'E') {
             this.nodoAttuale = {
                 giro: this.nodoAttuale.giro,
                 ramo: 'F'
             };
-            let nodo = this.ragantela.getNodo(this.nodoAttuale);
-            this.setPosition(nodo.x, nodo.y);
-            return;
-        }
+        } else
         if (this.nodoAttuale.ramo === 'F') {
             this.nodoAttuale = {
                 giro: this.nodoAttuale.giro < 3 ? this.nodoAttuale.giro + 1 : this.nodoAttuale.giro,
                 ramo: 'F'
             };
-            let nodo = this.ragantela.getNodo(this.nodoAttuale);
-            this.setPosition(nodo.x, nodo.y);
-            return;
         }
+        this.updatePosition();
     }
 
     right() {
@@ -79,55 +67,38 @@ export class Ragno extends Phaser.GameObjects.Image {
                 giro: this.nodoAttuale.giro,
                 ramo: 'B'
             };
-            let nodo = this.ragantela.getNodo(this.nodoAttuale);
-            this.setPosition(nodo.x, nodo.y);
-            return;
-        }
+        } else
         if (this.nodoAttuale.ramo === 'B') {
             this.nodoAttuale = {
                 giro: this.nodoAttuale.giro,
                 ramo: 'C'
             };
-            let nodo = this.ragantela.getNodo(this.nodoAttuale);
-            this.setPosition(nodo.x, nodo.y);
-            return;
-        }
+        } else
         if (this.nodoAttuale.ramo === 'C') {
             this.nodoAttuale = {
                 giro: this.nodoAttuale.giro < 3 ? this.nodoAttuale.giro + 1 : this.nodoAttuale.giro,
                 ramo: 'C'
             };
-            let nodo = this.ragantela.getNodo(this.nodoAttuale);
-            this.setPosition(nodo.x, nodo.y);
-            return;
-        }
+        } else
         if (this.nodoAttuale.ramo === 'D') {
             this.nodoAttuale = {
                 giro: this.nodoAttuale.giro < 3 ? this.nodoAttuale.giro + 1 : this.nodoAttuale.giro,
                 ramo: 'D'
             };
-            let nodo = this.ragantela.getNodo(this.nodoAttuale);
-            this.setPosition(nodo.x, nodo.y);
-            return;
-        }
+        } else
         if (this.nodoAttuale.ramo === 'E') {
             this.nodoAttuale = {
                 giro: this.nodoAttuale.giro,
                 ramo: 'D'
             };
-            let nodo = this.ragantela.getNodo(this.nodoAttuale);
-            this.setPosition(nodo.x, nodo.y);
-            return;
-        }
+        } else
         if (this.nodoAttuale.ramo === 'F') {
             this.nodoAttuale = {
                 giro: this.nodoAttuale.giro > 0 ? this.nodoAttuale.giro - 1 : this.nodoAttuale.giro,
                 ramo: 'F'
             };
-            let nodo = this.ragantela.getNodo(this.nodoAttuale);
-            this.setPosition(nodo.x, nodo.y);
-            return;
         }
+        this.updatePosition();
     }
 
     up() {
@@ -136,55 +107,38 @@ export class Ragno extends Phaser.GameObjects.Image {
                 giro: this.nodoAttuale.giro < 3 ? this.nodoAttuale.giro + 1 : this.nodoAttuale.giro,
                 ramo: 'A'
             };
-            let nodo = this.ragantela.getNodo(this.nodoAttuale);
-            this.setPosition(nodo.x, nodo.y);
-            return;
-        }
+        } else
         if (this.nodoAttuale.ramo === 'B') {
             this.nodoAttuale = {
                 giro: this.nodoAttuale.giro < 3 ? this.nodoAttuale.giro + 1 : this.nodoAttuale.giro,
                 ramo: 'B'
             };
-            let nodo = this.ragantela.getNodo(this.nodoAttuale);
-            this.setPosition(nodo.x, nodo.y);
-            return;
-        }
+        } else
         if (this.nodoAttuale.ramo === 'C') {
             this.nodoAttuale = {
                 giro: this.nodoAttuale.giro,
                 ramo: 'B'
             };
-            let nodo = this.ragantela.getNodo(this.nodoAttuale);
-            this.setPosition(nodo.x, nodo.y);
-            return;
-        }
+        } else
         if (this.nodoAttuale.ramo === 'D') {
             this.nodoAttuale = {
                 giro: this.nodoAttuale.giro,
                 ramo: 'C'
             };
-            let nodo = this.ragantela.getNodo(this.nodoAttuale);
-            this.setPosition(nodo.x, nodo.y);
-            return;
-        }
+        } else
         if (this.nodoAttuale.ramo === 'E') {
             this.nodoAttuale = {
                 giro: this.nodoAttuale.giro > 0 ? this.nodoAttuale.giro - 1 : this.nodoAttuale.giro,
                 ramo: 'E'
             };
-            let nodo = this.ragantela.getNodo(this.nodoAttuale);
-            this.setPosition(nodo.x, nodo.y);
-            return;
-        }
+        } else
         if (this.nodoAttuale.ramo === 'F') {
             this.nodoAttuale = {
                 giro: this.nodoAttuale.giro,
                 ramo: 'A'
             };
-            let nodo = this.ragantela.getNodo(this.nodoAttuale);
-            this.setPosition(nodo.x, nodo.y);
-            return;
         }
+        this.updatePosition();
     }
 
     down() {
@@ -193,54 +147,37 @@ export class Ragno extends Phaser.GameObjects.Image {
                 giro: this.nodoAttuale.giro,
                 ramo: 'F'
             };
-            let nodo = this.ragantela.getNodo(this.nodoAttuale);
-            this.setPosition(nodo.x, nodo.y);
-            return;
-        }
+        } else
         if (this.nodoAttuale.ramo === 'B') {
             this.nodoAttuale = {
                 giro: this.nodoAttuale.giro > 0 ? this.nodoAttuale.giro-1 : this.nodoAttuale.giro,
                 ramo: 'B'
             };
-            let nodo = this.ragantela.getNodo(this.nodoAttuale);
-            this.setPosition(nodo.x, nodo.y);
-            return;
-        }
+        } else
         if (this.nodoAttuale.ramo === 'C') {
             this.nodoAttuale = {
                 giro: this.nodoAttuale.giro,
                 ramo: 'D'
             };
-            let nodo = this.ragantela.getNodo(this.nodoAttuale);
-            this.setPosition(nodo.x, nodo.y);
-            return;
-        }
+        } else
         if (this.nodoAttuale.ramo === 'D') {
             this.nodoAttuale = {
                 giro: this.nodoAttuale.giro,
                 ramo: 'E'
             };
-            let nodo = this.ragantela.getNodo(this.nodoAttuale);
-            this.setPosition(nodo.x, nodo.y);
-            return;
-        }
+        } else
         if (this.nodoAttuale.ramo === 'E') {
             this.nodoAttuale = {
                 giro: this.nodoAttuale.giro < 3 ? this.nodoAttuale.giro+1 : this.nodoAttuale.giro,
                 ramo: 'E'
             };
-            let nodo = this.ragantela.getNodo(this.nodoAttuale);
-            this.setPosition(nodo.x, nodo.y);
-            return;
-        }
+        } else
         if (this.nodoAttuale.ramo === 'F') {
             this.nodoAttuale = {
                 giro: this.nodoAttuale.giro,
                 ramo: 'E'
             };
-            let nodo = this.ragantela.getNodo(this.nodoAttuale);
-            this.setPosition(nodo.x, nodo.y);
-            return;
         }
+        this.updatePosition();
     }
 }

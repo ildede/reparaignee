@@ -98,7 +98,7 @@ export class Ragnatela extends Phaser.GameObjects.Image {
         }
     }
 
-    getNodo(nodo: { ramo: string; giro: number }) {
+    getPoint(nodo: { ramo: string; giro: number }) {
         return this[nodo.ramo][nodo.giro];
     }
 }
