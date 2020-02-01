@@ -21,6 +21,8 @@ export class GameScene extends Phaser.Scene {
     private downLeft: Phaser.Input.Keyboard.Key;
     private left: Phaser.Input.Keyboard.Key;
     private upLeft: Phaser.Input.Keyboard.Key;
+    private graphics: Phaser.GameObjects.Graphics;
+    private alreadyDown: boolean;
 
     constructor() {
         super(sceneConfig);
@@ -45,12 +47,33 @@ export class GameScene extends Phaser.Scene {
         this.downLeft = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
         this.left = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         this.upLeft = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
+        this.alreadyDown = false;
+
+        this.graphics = this.add.graphics({
+            lineStyle: {
+                width: 1,
+                color: 0x000000,
+                alpha: 1
+            },
+            fillStyle: {
+                color: 0x000000,
+                alpha: 1
+            }
+        });
     }
 
     update() {
         if (this.input.activePointer.isDown) {
-            console.log('X:' + this.input.activePointer.x);
-            console.log('Y:' + this.input.activePointer.y);
+            if (!this.alreadyDown) {
+                this.alreadyDown = true;
+                console.log('X:' + this.input.activePointer.x);
+                console.log('Y:' + this.input.activePointer.y);
+                let line = this.ragnatela.getRandomLine();
+                var circle = new Phaser.Geom.Circle(line.x, line.y, 5);
+                this.graphics.fillCircleShape(circle);
+            }
+        } else {
+            this.alreadyDown = false;
         }
 
         if (Phaser.Input.Keyboard.JustDown(this.up)) {

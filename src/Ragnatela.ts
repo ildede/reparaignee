@@ -65,6 +65,36 @@ export class Ragnatela extends Phaser.GameObjects.Image {
         return new WebNode('Z', 0, this.Z[0].point, this.Z[0].line);
     }
 
+    getRandomLine() {
+        let ramo = Math.floor(Math.random() * 6);
+        switch (ramo) {
+            case 0: {
+                let giro = Math.floor(Math.random() * this.A.length);
+                return this.A[giro].line;
+            }
+            case 1: {
+                let giro = Math.floor(Math.random() * this.B.length);
+                return this.B[giro].line;
+            }
+            case 2: {
+                let giro = Math.floor(Math.random() * this.C.length);
+                return this.C[giro].line;
+            }
+            case 3: {
+                let giro = Math.floor(Math.random() * this.D.length);
+                return this.D[giro].line;
+            }
+            case 4: {
+                let giro = Math.floor(Math.random() * this.E.length);
+                return this.E[giro].line;
+            }
+            case 5: {
+                let giro = Math.floor(Math.random() * this.F.length);
+                return this.F[giro].line;
+            }
+        }
+    }
+
     getPoint(nodo: { ramo: string; giro: number }) {
         return this[nodo.ramo][nodo.giro].point;
     }
