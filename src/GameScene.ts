@@ -28,6 +28,7 @@ export class GameScene extends Phaser.Scene {
     }
 
     preload() {
+        this.load.audio('flycatch', 'assets/audio/flycatch.mp3');
         this.load.image('background', 'assets/sprites/sfondo.png');
         this.load.image('alberi', 'assets/sprites/alberi.png');
         this.load.image('ragno', 'assets/sprites/ragno.png');
@@ -40,14 +41,22 @@ export class GameScene extends Phaser.Scene {
         this.add.image(this.scale.width/2,this.scale.height/2, 'alberi');
         this.ragno = new Ragno(this, 'ragno', this.ragnatela);
         this.cursorKeys = this.input.keyboard.createCursorKeys();
-        this.up = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
-        this.upRight = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
-        this.right = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
-        this.downRight = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C);
-        this.down = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.X);
-        this.downLeft = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
-        this.left = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
-        this.upLeft = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
+        // this.up = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+        // this.upRight = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
+        // this.right = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+        // this.downRight = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C);
+        // this.down = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.X);
+        // this.downLeft = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
+        // this.left = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+        // this.upLeft = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
+        this.up = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.EIGHT);
+        this.upRight = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.NINE);
+        this.right = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SIX);
+        this.downRight = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.THREE);
+        this.down = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.TWO);
+        this.downLeft = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ONE);
+        this.left = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.FOUR);
+        this.upLeft = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SEVEN);
         this.alreadyDown = false;
         var timer = this.time.addEvent({
             delay: 3000,
@@ -62,6 +71,11 @@ export class GameScene extends Phaser.Scene {
     }
 
     addRandomInsect() {
+        this.sound.play('flycatch');
+        this.time.delayedCall(600, this.addRandomTipula, [], this);
+    }
+
+    addRandomTipula() {
         this.ragnatela.addToRandomLine('tipula');
     }
 
