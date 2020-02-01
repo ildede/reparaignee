@@ -1,0 +1,31 @@
+{
+  "name": "typeplay",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha -r ts-node/register tests/**/*.test.ts",
+    "coverage": "nyc -r lcov -e .ts -x \"*.test.ts\" npm run test",
+    "build": "webpack",
+    "dev": "webpack-dev-server"
+  },
+  "author": "Davide Pedron (davide@happydev.cloud)",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/chai": "^4.2.7",
+    "@types/mocha": "^5.2.7",
+    "chai": "^4.2.0",
+    "copy-webpack-plugin": "^5.1.1",
+    "mocha": "^7.0.0",
+    "nyc": "^15.0.0",
+    "ts-loader": "^6.2.1",
+    "ts-node": "^8.6.2",
+    "typescript": "^3.7.4",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.10.1"
+  },
+  "dependencies": {
+    "phaser": "^3.21.0"
+  }
+}
