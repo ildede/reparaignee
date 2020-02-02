@@ -42,6 +42,7 @@ export class GameScene extends Phaser.Scene {
         this.load.audio('music', 'assets/audio/music.mp3');
         this.load.audio('birds', 'assets/audio/birds.mp3');
         this.load.image('ragnatela', 'assets/sprites/ragnatelamidres.png');
+        this.load.image('sfondo', 'assets/sprites/prosfondo.png');
         this.load.image('alberi', 'assets/sprites/alberimidres.png');
         this.load.image('ragno', 'assets/sprites/ragnomidres.png');
         this.load.image('tipula', 'assets/sprites/tipulamidres.png');
@@ -67,6 +68,7 @@ export class GameScene extends Phaser.Scene {
             volume: .6,
             loop: true,
         });
+        this.add.image(this.scale.width/2,this.scale.height/2, 'sfondo');
         this.ragnatela = new RagnatelaMidRes(this, 'ragnatela');
         this.add.image(this.scale.width/2,this.scale.height/2, 'alberi');
         this.ragno = new Ragno(this, 'ragnosheet', this.ragnatela);
