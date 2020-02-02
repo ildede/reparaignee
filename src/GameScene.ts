@@ -34,6 +34,9 @@ export class GameScene extends Phaser.Scene {
     private alreadyDown: boolean;
     private space: Phaser.Input.Keyboard.Key;
 
+    private mantideEvent: boolean;
+    private mantideImage: Phaser.GameObjects.Image;
+
     constructor() {
         super(sceneConfig);
     }
@@ -47,6 +50,7 @@ export class GameScene extends Phaser.Scene {
         this.load.image('ragnatela', 'assets/sprites/ragnatelamidres.png');
         // this.load.image('sfondo', 'assets/sprites/prosfondo.png');
         this.load.image('alberi', 'assets/sprites/alberimidres.png');
+        this.load.image('mantideninja', 'assets/sprites/mantininjamidres.png');
         this.load.image('ragno', 'assets/sprites/ragnomidres.png');
         this.load.image('tipula', 'assets/sprites/tipulamidres.png');
         this.load.image('falena', 'assets/sprites/falenamidres.png');
@@ -94,13 +98,14 @@ export class GameScene extends Phaser.Scene {
         this.left2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.FOUR);
         this.upLeft2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SEVEN);
         this.alreadyDown = false;
+        this.mantideEvent = false;
         var insectTimer = this.time.addEvent({
             delay: 3000,
             callback: this.addRandomInsect,
             args: [],
             callbackScope: this,
             loop: true,
-            startAt: 0,
+            startAt: 1000,
             timeScale: 1,
             paused: false
         });
@@ -110,37 +115,76 @@ export class GameScene extends Phaser.Scene {
             args: [],
             callbackScope: this,
             loop: true,
-            startAt: 0,
+            startAt: 4000,
+            timeScale: 1,
+            paused: false
+        });
+        var mantideTimer = this.time.addEvent({
+            delay: 5000,
+            callback: this.startMantideEvent,
+            args: [],
+            callbackScope: this,
+            loop: true,
+            startAt: 2000,
             timeScale: 1,
             paused: false
         });
     }
 
+    startMantideEvent() {
+        if (!this.mantideEvent && !this.ragno.dead) {
+            this.mantideEvent = true;
+            this.mantideImage = this.add.image(300,340, 'mantide');
+            this.time.delayedCall(10000, this.stopMantideEvent, [], this);
+        }
+    }
+
+    stopMantideEvent() {
+        if (!this.ragno.dead && this.mantideEvent) {
+            if (this.ragno.conninellaTakenCount > 2) {
+                console.log('HAPPY mantide con coccinelle', this.ragno.conninellaTakenCount);
+            } else {
+                console.log('NINJA mantide con coccinelle', this.ragno.conninellaTakenCount);
+            }
+            this.mantideEvent = false;
+            this.mantideImage.destroy();
+            this.ragno.conninellaTakenCount = 0;
+        }
+    }
+
     addRandomInsect() {
         if (!this.ragno.dead) {
-            this.sound.play('flycatch', {
-                volume: 1.5
-            });
-            switch (Math.floor(Math.random() * 3)) {
-                case 0: {
-                    this.time.delayedCall(600, this.addRandomTipula, [false], this);
-                    break;
+            if (!this.mantideEvent) {
+                this.sound.play('flycatch', {
+                    volume: 1.5
+                });
+                switch (Math.floor(Math.random() * 3)) {
+                    case 0: {
+                        this.time.delayedCall(600, this.addRandomTipula, [false], this);
+                        break;
+                    }
+                    case 1: {
+                        this.time.delayedCall(600, this.addRandomFalena, [true], this);
+                        break;
+                    }
+                    case 2: {
+                        this.time.delayedCall(600, this.addRandomCoccinella, [true], this);
+                        break;
+                    }
                 }
-                case 1: {
-                    this.time.delayedCall(600, this.addRandomFalena, [true], this);
-                    break;
-                }
-                case 2: {
-                    this.time.delayedCall(600, this.addRandomCoccinella, [true], this);
-                    break;
-                }
+            } else {
+                this.sound.play('flycatch', {
+                    volume: 1.5
+                });
+                this.time.delayedCall(600, this.addRandomCoccinella, [true], this);
             }
         }
+
 
     }
 
     addRandomBonus() {
-        if (!this.ragno.dead) {
+        if (!this.mantideEvent && !this.ragno.dead) {
             switch (Math.floor(Math.random() * 3)) {
                 case 0: {
                     console.log('niente bonus questa volta');

@@ -16,6 +16,7 @@ export class Ragno extends Phaser.Physics.Arcade.Sprite {
     private previousNode: WebNode;
     private particles: Array<any> = [];
     dead: boolean;
+    conninellaTakenCount: number;
 
     constructor(scene: Scene, texture: string, ragnatela: RagnatelaMidRes) {
         super(scene, 206, 0, texture);
@@ -23,6 +24,7 @@ export class Ragno extends Phaser.Physics.Arcade.Sprite {
         this.myWebNode = this.ragnatela.getStartingNode();
         this.targetNode = null;
         this.dead = false;
+        this.conninellaTakenCount = 0;
         this.movingSound = this.scene.sound.add('spidermove');
         this.repairingSound = this.scene.sound.add('spiderrepair', {
             volume: .2
@@ -69,9 +71,16 @@ export class Ragno extends Phaser.Physics.Arcade.Sprite {
                     this.targetNode = new Phaser.Math.Vector2(pointToMoveTo.x, pointToMoveTo.y);
                     this.scene.physics.moveToObject(this, this.targetNode, this.speed);
                     this.myWebNode = webNode;
+
+                    // @ts-ignore
+                    if (this.scene.mantideEvent && lineBetween.sprite.texture.key === 'coccinella') {
+                        this.conninellaTakenCount += 1;
+                    }
+
                     lineBetween.sprite.destroy();
                     lineBetween.insect = false;
                     lineBetween.edible = false;
+
                 } else {
                     console.log('INSETTI grandi, non mi muovo');
                 }
