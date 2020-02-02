@@ -48,6 +48,7 @@ export class GameScene extends Phaser.Scene {
         this.load.audio('spiderrepair', 'assets/audio/webrepair.mp3');
         this.load.audio('music', 'assets/audio/music.mp3');
         this.load.audio('birds', 'assets/audio/birds.mp3');
+        this.load.image('fumetto', 'assets/audio/fumettomidres.png');
         this.load.image('ragnatela', 'assets/sprites/ragnatelamidres.png');
         // this.load.image('sfondo', 'assets/sprites/prosfondo.png');
         this.load.image('alberi', 'assets/sprites/alberimidres.png');
@@ -116,12 +117,12 @@ export class GameScene extends Phaser.Scene {
             args: [],
             callbackScope: this,
             loop: true,
-            startAt: 4000,
+            startAt: 1000,
             timeScale: 1,
             paused: false
         });
         var mantideTimer = this.time.addEvent({
-            delay: 5000,
+            delay: 30000,
             callback: this.startMantideEvent,
             args: [],
             callbackScope: this,
@@ -136,8 +137,15 @@ export class GameScene extends Phaser.Scene {
         if (!this.mantideEvent && !this.ragno.dead) {
             this.mantideEvent = true;
             this.mantideImage = this.add.image(300,340, 'mantide');
-            this.time.delayedCall(10000, this.stopMantideEvent, [], this);
+            var fumetto = this.add.image(this.scale.width/2,this.scale.height/2, 'fumetto');
+            fumetto.setDepth(99);
+            this.time.delayedCall(2000, this.beginEvent, [fumetto], this);
         }
+    }
+
+    beginEvent(fumetto) {
+        fumetto.destroy();
+        this.time.delayedCall(10000, this.stopMantideEvent, [], this);
     }
 
     stopMantideEvent() {
