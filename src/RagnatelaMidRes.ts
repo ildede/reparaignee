@@ -14,14 +14,14 @@ export class RagnatelaMidRes extends Phaser.GameObjects.Image {
     private H: Array<{point: Point}>;
     private Z: Array<{point: Point}>;
 
-    private AB: Array<{point: Point, insect: boolean, broken: boolean, sprite: Phaser.GameObjects.Image }>;
-    private BC: Array<{point: Point, insect: boolean, broken: boolean, sprite: Phaser.GameObjects.Image }>;
-    private CD: Array<{point: Point, insect: boolean, broken: boolean, sprite: Phaser.GameObjects.Image }>;
-    private DE: Array<{point: Point, insect: boolean, broken: boolean, sprite: Phaser.GameObjects.Image }>;
-    private EF: Array<{point: Point, insect: boolean, broken: boolean, sprite: Phaser.GameObjects.Image }>;
-    private FG: Array<{point: Point, insect: boolean, broken: boolean, sprite: Phaser.GameObjects.Image }>;
-    private GH: Array<{point: Point, insect: boolean, broken: boolean, sprite: Phaser.GameObjects.Image }>;
-    private HA: Array<{point: Point, insect: boolean, broken: boolean, sprite: Phaser.GameObjects.Image }>;
+    private AB: Array<{point: Point, insect: boolean, bonus: boolean, broken: boolean, sprite: Phaser.GameObjects.Image }>;
+    private BC: Array<{point: Point, insect: boolean, bonus: boolean, broken: boolean, sprite: Phaser.GameObjects.Image }>;
+    private CD: Array<{point: Point, insect: boolean, bonus: boolean, broken: boolean, sprite: Phaser.GameObjects.Image }>;
+    private DE: Array<{point: Point, insect: boolean, bonus: boolean, broken: boolean, sprite: Phaser.GameObjects.Image }>;
+    private EF: Array<{point: Point, insect: boolean, bonus: boolean, broken: boolean, sprite: Phaser.GameObjects.Image }>;
+    private FG: Array<{point: Point, insect: boolean, bonus: boolean, broken: boolean, sprite: Phaser.GameObjects.Image }>;
+    private GH: Array<{point: Point, insect: boolean, bonus: boolean, broken: boolean, sprite: Phaser.GameObjects.Image }>;
+    private HA: Array<{point: Point, insect: boolean, bonus: boolean, broken: boolean, sprite: Phaser.GameObjects.Image }>;
 
     constructor(scene: Phaser.Scene, texture: string) {
         super(
@@ -81,52 +81,52 @@ export class RagnatelaMidRes extends Phaser.GameObjects.Image {
             { point: new Point(95,193) },
             ];
         this.AB = [
-            { point: new Point(208,145), insect: false, broken: false, sprite: null },
-            { point: new Point(205,123), insect: false, broken: false, sprite: null },
-            { point: new Point(204,104), insect: false, broken: false, sprite: null },
-            { point: new Point(196,83), insect: false, broken: false, sprite: null },
+            { point: new Point(208,145), insect: false, bonus: false, broken: false, sprite: null },
+            { point: new Point(205,123), insect: false, bonus: false, broken: false, sprite: null },
+            { point: new Point(204,104), insect: false, bonus: false, broken: false, sprite: null },
+            { point: new Point(196,83), insect: false, bonus: false, broken: false, sprite: null },
             ];
         this.BC = [
-            { point: new Point(237,149), insect: false, broken: false, sprite: null },
-            { point: new Point(247,133), insect: false, broken: false, sprite: null },
-            { point: new Point(258,113), insect: false, broken: false, sprite: null },
-            { point: new Point(274,91), insect: false, broken: false, sprite: null },
+            { point: new Point(237,149), insect: false, bonus: false, broken: false, sprite: null },
+            { point: new Point(247,133), insect: false, bonus: false, broken: false, sprite: null },
+            { point: new Point(258,113), insect: false, bonus: false, broken: false, sprite: null },
+            { point: new Point(274,91), insect: false, bonus: false, broken: false, sprite: null },
             ];
         this.CD = [
-            { point: new Point(257,165), insect: false, broken: false, sprite: null },
-            { point: new Point(279,158), insect: false, broken: false, sprite: null },
-            { point: new Point(297,151), insect: false, broken: false, sprite: null },
-            { point: new Point(318,142), insect: false, broken: false, sprite: null },
+            { point: new Point(257,165), insect: false, bonus: false, broken: false, sprite: null },
+            { point: new Point(279,158), insect: false, bonus: false, broken: false, sprite: null },
+            { point: new Point(297,151), insect: false, bonus: false, broken: false, sprite: null },
+            { point: new Point(318,142), insect: false, bonus: false, broken: false, sprite: null },
             ];
         this.DE = [
-            { point: new Point(251,198), insect: false, broken: false, sprite: null },
-            { point: new Point(269,207), insect: false, broken: false, sprite: null },
-            { point: new Point(285,212), insect: false, broken: false, sprite: null },
-            { point: new Point(308,224), insect: false, broken: false, sprite: null },
+            { point: new Point(251,198), insect: false, bonus: false, broken: false, sprite: null },
+            { point: new Point(269,207), insect: false, bonus: false, broken: false, sprite: null },
+            { point: new Point(285,212), insect: false, bonus: false, broken: false, sprite: null },
+            { point: new Point(308,224), insect: false, bonus: false, broken: false, sprite: null },
             ];
         this.EF = [
-            { point: new Point(220,224), insect: false, broken: false, sprite: null },
-            { point: new Point(228,249), insect: false, broken: false, sprite: null },
-            { point: new Point(227,276), insect: false, broken: false, sprite: null },
-            { point: new Point(239,302), insect: false, broken: false, sprite: null },
+            { point: new Point(220,224), insect: false, bonus: false, broken: false, sprite: null },
+            { point: new Point(228,249), insect: false, bonus: false, broken: false, sprite: null },
+            { point: new Point(227,276), insect: false, bonus: false, broken: false, sprite: null },
+            { point: new Point(239,302), insect: false, bonus: false, broken: false, sprite: null },
             ];
         this.FG = [
-            { point: new Point(191,218), insect: false, broken: false, sprite: null },
-            { point: new Point(177,243), insect: false, broken: false, sprite: null },
-            { point: new Point(165,260), insect: false, broken: false, sprite: null },
-            { point: new Point(149,282), insect: false, broken: false, sprite: null },
+            { point: new Point(191,218), insect: false, bonus: false, broken: false, sprite: null },
+            { point: new Point(177,243), insect: false, bonus: false, broken: false, sprite: null },
+            { point: new Point(165,260), insect: false, bonus: false, broken: false, sprite: null },
+            { point: new Point(149,282), insect: false, bonus: false, broken: false, sprite: null },
             ];
         this.GH = [
-            { point: new Point(180,197), insect: false, broken: false, sprite: null },
-            { point: new Point(154,204), insect: false, broken: false, sprite: null },
-            { point: new Point(135,214), insect: false, broken: false, sprite: null },
-            { point: new Point(110,220), insect: false, broken: false, sprite: null },
+            { point: new Point(180,197), insect: false, bonus: false, broken: false, sprite: null },
+            { point: new Point(154,204), insect: false, bonus: false, broken: false, sprite: null },
+            { point: new Point(135,214), insect: false, bonus: false, broken: false, sprite: null },
+            { point: new Point(110,220), insect: false, bonus: false, broken: false, sprite: null },
             ];
         this.HA = [
-            { point: new Point(184,166), insect: false, broken: false, sprite: null },
-            { point: new Point(162,157), insect: false, broken: false, sprite: null },
-            { point: new Point(149,142), insect: false, broken: false, sprite: null },
-            { point: new Point(123,138), insect: false, broken: false, sprite: null },
+            { point: new Point(184,166), insect: false, bonus: false, broken: false, sprite: null },
+            { point: new Point(162,157), insect: false, bonus: false, broken: false, sprite: null },
+            { point: new Point(149,142), insect: false, bonus: false, broken: false, sprite: null },
+            { point: new Point(123,138), insect: false, bonus: false, broken: false, sprite: null },
             ];
         this.Z = [{ point: new Point(215,184) }];
     }
@@ -172,7 +172,7 @@ export class RagnatelaMidRes extends Phaser.GameObjects.Image {
                 break;
             }
         }
-        if (node.broken || node.insect) {
+        if (node.broken || node.insect || node.bonus) {
             return this.getRandomLine();
         } else {
             return node;
@@ -481,18 +481,30 @@ export class RagnatelaMidRes extends Phaser.GameObjects.Image {
         }
     }
 
-    addToRandomLine(texture: string) {
+    addInsectToRandomLine(texture: string) {
         let line = this.getRandomLine();
         line.insect = true;
         let insect = this.scene.add.image(line.point.x, line.point.y, texture);
-        this.scene.time.delayedCall(1500, this.doSomething, [insect, line], this);
+        this.scene.time.delayedCall(1500, this.destroyInsect, [insect, line], this);
     }
 
-    doSomething(insect, line) {
+    destroyInsect(insect, line) {
         insect.destroy();
         line.insect = false;
         line.sprite = this.scene.add.image(line.point.x, line.point.y, 'hole');
         line.broken = true;
+    }
+
+    addBonusToRandomLine(texture: string) {
+        let line = this.getRandomLine();
+        line.bonus = true;
+        let bonus = this.scene.add.image(line.point.x, line.point.y, texture);
+        this.scene.time.delayedCall(2000, this.destroyBonus, [bonus, line], this);
+    }
+
+    destroyBonus(bonus, line) {
+        bonus.destroy();
+        line.bonus = false;
     }
 
     hasInsectBetween(from: WebNode, to: WebNode) {

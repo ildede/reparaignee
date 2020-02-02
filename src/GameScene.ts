@@ -46,7 +46,10 @@ export class GameScene extends Phaser.Scene {
         this.load.image('ragno', 'assets/sprites/ragnomidres.png');
         this.load.image('tipula', 'assets/sprites/tipulamidres.png');
         this.load.image('falena', 'assets/sprites/falenamidres.png');
+        this.load.image('coccinella', 'assets/sprites/coccinellamidres.png');
         this.load.image('hole', 'assets/sprites/hole.png');
+        this.load.image('caffe', 'assets/sprites/caffemidres.png');
+        this.load.image('pillola', 'assets/sprites/pillolamidres.png');
     }
 
     create() {
@@ -79,9 +82,19 @@ export class GameScene extends Phaser.Scene {
         this.left2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.FOUR);
         this.upLeft2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SEVEN);
         this.alreadyDown = false;
-        var timer = this.time.addEvent({
+        var insectTimer = this.time.addEvent({
             delay: 3000,
             callback: this.addRandomInsect,
+            args: [],
+            callbackScope: this,
+            loop: true,
+            startAt: 0,
+            timeScale: 1,
+            paused: false
+        });
+        var bonusTimer = this.time.addEvent({
+            delay: 5000,
+            callback: this.addRandomBonus,
             args: [],
             callbackScope: this,
             loop: true,
@@ -95,7 +108,7 @@ export class GameScene extends Phaser.Scene {
         this.sound.play('flycatch', {
             volume: 1.5
         });
-        switch (Math.floor(Math.random() * 2)) {
+        switch (Math.floor(Math.random() * 3)) {
             case 0: {
                 this.time.delayedCall(600, this.addRandomTipula, [], this);
                 break;
@@ -104,16 +117,42 @@ export class GameScene extends Phaser.Scene {
                 this.time.delayedCall(600, this.addRandomFalena, [], this);
                 break;
             }
+            case 2: {
+                this.time.delayedCall(600, this.addRandomCoccinella, [], this);
+                break;
+            }
+        }
+
+    }
+
+    addRandomBonus() {
+        switch (Math.floor(Math.random() * 3)) {
+            case 0: {
+                console.log('niente bonus questa volta');
+                break;
+            }
+            case 1: {
+                this.ragnatela.addBonusToRandomLine('caffe');
+                break;
+            }
+            case 2: {
+                this.ragnatela.addBonusToRandomLine('pillola');
+                break;
+            }
         }
 
     }
 
     addRandomTipula() {
-        this.ragnatela.addToRandomLine('tipula');
+        this.ragnatela.addInsectToRandomLine('tipula');
     }
 
     addRandomFalena() {
-        this.ragnatela.addToRandomLine('falena');
+        this.ragnatela.addInsectToRandomLine('falena');
+    }
+
+    addRandomCoccinella() {
+        this.ragnatela.addInsectToRandomLine('coccinella');
     }
 
     update() {
