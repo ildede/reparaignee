@@ -135,7 +135,7 @@ export class GameScene extends Phaser.Scene {
         if (!this.mantideEvent && !this.ragno.dead) {
             this.mantideEvent = true;
             this.mantideImage = this.add.image(300,340, 'mantide');
-            this.time.delayedCall(5000, this.stopMantideEvent, [], this);
+            this.time.delayedCall(10000, this.stopMantideEvent, [], this);
         }
     }
 
