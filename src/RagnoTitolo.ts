@@ -40,7 +40,6 @@ export class RagnoTitolo extends Phaser.Physics.Arcade.Sprite {
 
     updatePosition() {
         let distance = Phaser.Math.Distance.Between(this.x, this.y, this.targetPoint.x, this.targetPoint.y);
-        console.log(distance);
         if (distance < 4) {
             this.body.reset(this.targetPoint.x, this.targetPoint.y);
             this.targetPoint = null;
