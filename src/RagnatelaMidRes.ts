@@ -481,11 +481,11 @@ export class RagnatelaMidRes extends Phaser.GameObjects.Image {
         }
     }
 
-    addInsectToRandomLine(texture: string) {
+    addInsectToRandomLine(texture: string, destroyDelay = 1500) {
         let line = this.getRandomLine();
         line.insect = true;
         let insect = this.scene.add.image(line.point.x, line.point.y, texture);
-        this.scene.time.delayedCall(1500, this.destroyInsect, [insect, line], this);
+        this.scene.time.delayedCall(destroyDelay, this.destroyInsect, [insect, line], this);
     }
 
     destroyInsect(insect, line) {
@@ -495,11 +495,11 @@ export class RagnatelaMidRes extends Phaser.GameObjects.Image {
         line.broken = true;
     }
 
-    addBonusToRandomLine(texture: string) {
+    addBonusToRandomLine(texture: string, destroydelay = 3000) {
         let line = this.getRandomLine();
         line.bonus = true;
         let bonus = this.scene.add.image(line.point.x, line.point.y, texture);
-        this.scene.time.delayedCall(2000, this.destroyBonus, [bonus, line], this);
+        this.scene.time.delayedCall(destroydelay, this.destroyBonus, [bonus, line], this);
     }
 
     destroyBonus(bonus, line) {

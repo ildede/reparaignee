@@ -50,6 +50,7 @@ export class GameScene extends Phaser.Scene {
         this.load.image('hole', 'assets/sprites/hole.png');
         this.load.image('caffe', 'assets/sprites/caffemidres.png');
         this.load.image('pillola', 'assets/sprites/pillolamidres.png');
+        this.load.image('fungo', 'assets/sprites/fungomidres.png');
     }
 
     create() {
@@ -136,7 +137,7 @@ export class GameScene extends Phaser.Scene {
                 break;
             }
             case 2: {
-                this.ragnatela.addBonusToRandomLine('pillola');
+                this.ragnatela.addBonusToRandomLine('fungo');
                 break;
             }
         }
@@ -148,11 +149,11 @@ export class GameScene extends Phaser.Scene {
     }
 
     addRandomFalena() {
-        this.ragnatela.addInsectToRandomLine('falena');
+        this.ragnatela.addInsectToRandomLine('falena', 4000);
     }
 
     addRandomCoccinella() {
-        this.ragnatela.addInsectToRandomLine('coccinella');
+        this.ragnatela.addInsectToRandomLine('coccinella', 5000);
     }
 
     update() {
