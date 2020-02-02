@@ -51,6 +51,10 @@ export class GameScene extends Phaser.Scene {
         this.load.image('caffe', 'assets/sprites/caffemidres.png');
         this.load.image('pillola', 'assets/sprites/pillolamidres.png');
         this.load.image('fungo', 'assets/sprites/fungomidres.png');
+        this.load.spritesheet('ragnosheet',
+            'assets/sprites/ragnosheet.png',
+            { frameWidth: 89, frameHeight: 87 }
+        );
     }
 
     create() {
@@ -64,7 +68,7 @@ export class GameScene extends Phaser.Scene {
         });
         this.ragnatela = new RagnatelaMidRes(this, 'ragnatela');
         this.add.image(this.scale.width/2,this.scale.height/2, 'alberi');
-        this.ragno = new Ragno(this, 'ragno', this.ragnatela);
+        this.ragno = new Ragno(this, 'ragnosheet', this.ragnatela);
         this.cursorKeys = this.input.keyboard.createCursorKeys();
         this.up1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
         this.upRight1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);

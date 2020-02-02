@@ -3,7 +3,7 @@ import {WebNode} from "./WebNode";
 import {RagnatelaMidRes} from "./RagnatelaMidRes";
 import Scene = Phaser.Scene;
 
-export class Ragno extends Phaser.Physics.Arcade.Image {
+export class Ragno extends Phaser.Physics.Arcade.Sprite {
 
     private myWebNode: WebNode;
     private ragnatela: RagnatelaMidRes;
@@ -16,7 +16,7 @@ export class Ragno extends Phaser.Physics.Arcade.Image {
     private previousNode: WebNode;
 
     constructor(scene: Scene, texture: string, ragnatela: RagnatelaMidRes) {
-        super(scene, 0, 0, texture);
+        super(scene, 206, 0, texture);
         this.ragnatela = ragnatela;
         this.myWebNode = this.ragnatela.getStartingNode();
         this.targetNode = null;
@@ -28,6 +28,20 @@ export class Ragno extends Phaser.Physics.Arcade.Image {
         scene.add.existing(this);
         scene.physics.add.existing(this);
         this.updatePositionTo(this.myWebNode);
+
+        scene.anims.create({
+            key: 'move',
+            frames: scene.anims.generateFrameNumbers(texture, { start: 1, end: 7 }),
+            frameRate: 15,
+            repeat: -1
+        });
+        scene.anims.create({
+            key: 'stay',
+            frames: [ { key: texture, frame: 0 } ],
+            frameRate: 20
+        });
+        this.rotation = 1.56;
+        this.anims.play('move', true);
     }
 
     updatePositionTo(webNode: WebNode) {
@@ -35,6 +49,7 @@ export class Ragno extends Phaser.Physics.Arcade.Image {
             console.log('INSETTI, non mi muovo');
         } else {
             this.movingSound.play();
+            this.anims.play('move', true);
             let currentPoint = this.ragnatela.getPoint(this.myWebNode);
             let pointToMoveTo = this.ragnatela.getPoint(webNode);
             this.rotation = Phaser.Math.Angle.BetweenPoints(currentPoint, pointToMoveTo);
@@ -133,6 +148,7 @@ export class Ragno extends Phaser.Physics.Arcade.Image {
                     this.body.reset(this.targetNode.x, this.targetNode.y);
                     this.targetNode = null;
                     this.movingSound.stop();
+                    this.anims.play('stay', true);
                 }
             }
         }
