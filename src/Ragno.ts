@@ -192,10 +192,6 @@ export class Ragno extends Phaser.Physics.Arcade.Sprite {
         }
     }
 
-    updateDeadPosition() {
-        this.anims.play('stay', true);
-    }
-
     isMoving() {
         // @ts-ignore
         return this.targetNode && (this.body.speed > 0 || this.lockOnRepair);
@@ -253,8 +249,8 @@ export class Ragno extends Phaser.Physics.Arcade.Sprite {
 
     gameOver() {
         this.dead = true;
+        this.anims.play('stay', true);
         var deathNode = new Phaser.Math.Vector2(this.body.x, 800);
         this.scene.physics.moveToObject(this, deathNode, 150);
-        // this.scene.start('GameOver');
     }
 }

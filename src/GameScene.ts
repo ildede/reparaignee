@@ -10,7 +10,7 @@ const sceneConfig: Phaser.Types.Scenes.SettingsConfig = {
 
 export class GameScene extends Phaser.Scene {
 
-    private readonly MAX_HOLE_COUNT = 0;
+    private readonly MAX_HOLE_COUNT = 35;
 
     private cursorKeys: Phaser.Types.Input.Keyboard.CursorKeys;
     private ragno: Ragno;
@@ -32,6 +32,7 @@ export class GameScene extends Phaser.Scene {
     private left2: Phaser.Input.Keyboard.Key;
     private upLeft2: Phaser.Input.Keyboard.Key;
     private alreadyDown: boolean;
+    private space: Phaser.Input.Keyboard.Key;
 
     constructor() {
         super(sceneConfig);
@@ -75,6 +76,7 @@ export class GameScene extends Phaser.Scene {
         this.add.image(this.scale.width/2,this.scale.height/2, 'alberi');
         this.ragno = new Ragno(this, 'ragnosheet', this.ragnatela);
         this.cursorKeys = this.input.keyboard.createCursorKeys();
+        this.space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         this.up1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
         this.upRight1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
         this.right1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
@@ -173,7 +175,10 @@ export class GameScene extends Phaser.Scene {
             if (!this.ragno.dead) {
                 this.ragno.gameOver();
             } else {
-                this.ragno.updateDeadPosition();
+
+                if (Phaser.Input.Keyboard.JustDown(this.space)) {
+                    this.scene.switch('GameOver');
+                }
             }
         } else {
             if (this.ragno.isMoving()) {
