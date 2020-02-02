@@ -3,8 +3,8 @@ import {Ragno} from "./Ragno";
 import {RagnatelaMidRes} from "./RagnatelaMidRes";
 
 const sceneConfig: Phaser.Types.Scenes.SettingsConfig = {
-    active: true,
-    visible: true,
+    active: false,
+    visible: false,
     key: 'Game'
 };
 
@@ -37,12 +37,12 @@ export class GameScene extends Phaser.Scene {
 
     preload() {
         this.load.audio('flycatch', 'assets/audio/flycatch.mp3');
-        this.load.audio('spidermove', 'assets/audio/spidermove.mp3');
+        // this.load.audio('spidermove', 'assets/audio/spidermove.mp3');
         this.load.audio('spiderrepair', 'assets/audio/webrepair.mp3');
         this.load.audio('music', 'assets/audio/music.mp3');
         this.load.audio('birds', 'assets/audio/birds.mp3');
         this.load.image('ragnatela', 'assets/sprites/ragnatelamidres.png');
-        this.load.image('sfondo', 'assets/sprites/prosfondo.png');
+        // this.load.image('sfondo', 'assets/sprites/prosfondo.png');
         this.load.image('alberi', 'assets/sprites/alberimidres.png');
         this.load.image('ragno', 'assets/sprites/ragnomidres.png');
         this.load.image('tipula', 'assets/sprites/tipulamidres.png');
@@ -52,10 +52,10 @@ export class GameScene extends Phaser.Scene {
         this.load.image('caffe', 'assets/sprites/caffemidres.png');
         this.load.image('pillola', 'assets/sprites/pillolamidres.png');
         this.load.image('fungo', 'assets/sprites/fungomidres.png');
-        this.load.spritesheet('ragnosheet',
-            'assets/sprites/ragnosheet.png',
-            { frameWidth: 89, frameHeight: 87 }
-        );
+        // this.load.spritesheet('ragnosheet',
+        //     'assets/sprites/ragnosheet.png',
+        //     { frameWidth: 89, frameHeight: 87 }
+        // );
         this.load.image('particle', 'assets/sprites/particle.png');
     }
 

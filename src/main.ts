@@ -1,5 +1,6 @@
 import * as Phaser from 'phaser';
 import {GameScene} from "./GameScene";
+import {TitleScene} from "./TitleScene";
 
 const gameConfig: Phaser.Types.Core.GameConfig = {
     title: 'Typeplay',
@@ -24,7 +25,7 @@ const gameConfig: Phaser.Types.Core.GameConfig = {
     },
 
     parent: 'game',
-    scene: [GameScene]
+    scene: [TitleScene, GameScene],
 };
 
 export const game = new Phaser.Game(gameConfig);
