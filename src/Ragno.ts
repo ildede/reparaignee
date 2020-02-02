@@ -74,6 +74,7 @@ export class Ragno extends Phaser.Physics.Arcade.Sprite {
 
                     // @ts-ignore
                     if (this.scene.mantideEvent && lineBetween.sprite.texture.key === 'coccinella') {
+                        this.scene.sound.play('coccinellaperninja');
                         this.conninellaTakenCount += 1;
                     }
 

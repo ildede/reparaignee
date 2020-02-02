@@ -10,7 +10,7 @@ const sceneConfig: Phaser.Types.Scenes.SettingsConfig = {
 
 export class GameScene extends Phaser.Scene {
 
-    private readonly MAX_HOLE_COUNT = 35;
+    private readonly MAX_HOLE_COUNT = 20;
 
     private cursorKeys: Phaser.Types.Input.Keyboard.CursorKeys;
     private ragno: Ragno;
@@ -42,13 +42,15 @@ export class GameScene extends Phaser.Scene {
     }
 
     preload() {
+        this.load.audio('coccinellaperninja', 'assets/audio/coccinella.wav');
+        this.load.audio('gameovermusic', 'assets/audio/gameover.mp3');
         this.load.audio('ninjamantide', 'assets/audio/ninjamantide.mp3');
         this.load.audio('flycatch', 'assets/audio/flycatch.mp3');
         // this.load.audio('spidermove', 'assets/audio/spidermove.mp3');
         this.load.audio('spiderrepair', 'assets/audio/webrepair.mp3');
         this.load.audio('music', 'assets/audio/music.mp3');
         this.load.audio('birds', 'assets/audio/birds.mp3');
-        this.load.image('fumetto', 'assets/audio/fumettomidres.png');
+        this.load.image('fumetto', 'assets/sprites/fumettomidres.png');
         this.load.image('ragnatela', 'assets/sprites/ragnatelamidres.png');
         // this.load.image('sfondo', 'assets/sprites/prosfondo.png');
         this.load.image('alberi', 'assets/sprites/alberimidres.png');
@@ -236,6 +238,7 @@ export class GameScene extends Phaser.Scene {
     update() {
         if (this.ragnatela.holeCount > this.MAX_HOLE_COUNT) {
             if (!this.ragno.dead) {
+                this.sound.play('gameovermusic');
                 this.ragno.gameOver();
             } else {
 
