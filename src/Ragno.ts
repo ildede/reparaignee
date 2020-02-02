@@ -10,7 +10,7 @@ export class Ragno extends Phaser.Physics.Arcade.Image {
     private targetNode: Phaser.Math.Vector2;
     private movingSound: Phaser.Sound.BaseSound;
     private repairingSound: Phaser.Sound.BaseSound;
-    private speed: number = 180;
+    private speed: number = 150;
     private waitNode: Phaser.Math.Vector2;
     private lockOnRepair: boolean = false;
     private previousNode: WebNode;
@@ -49,6 +49,20 @@ export class Ragno extends Phaser.Physics.Arcade.Image {
             } else {
                 if (this.ragnatela.hasBonusBetween(this.myWebNode, webNode)) {
                     let lineBetween = this.ragnatela.getLineBetween(this.myWebNode, webNode);
+                    switch (lineBetween.sprite.texture.key) {
+                        case 'fungo': {
+                            console.log('raccolto fungo');
+                            break;
+                        }
+                        case 'caffe': {
+                            this.speed += 50;
+                            break;
+                        }
+                        default: {
+                            console.log('raccolto boh');
+                            break;
+                        }
+                    }
                     lineBetween.sprite.destroy();
                     lineBetween.bonus = false;
                 }
@@ -107,7 +121,11 @@ export class Ragno extends Phaser.Physics.Arcade.Image {
                     this.body.reset(this.waitNode.x, this.waitNode.y);
                     this.waitNode = null;
                     this.startRepair();
-                    this.scene.time.delayedCall(1500, this.finishRepair, [], this);
+                    if (this.speed > 1000) {
+                        this.scene.time.delayedCall(500, this.finishRepair, [], this);
+                    } else {
+                        this.scene.time.delayedCall(1500-this.speed, this.finishRepair, [], this);
+                    }
                 }
             } else {
                 let distance = Phaser.Math.Distance.Between(this.x, this.y, this.targetNode.x, this.targetNode.y);
