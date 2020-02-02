@@ -115,15 +115,15 @@ export class GameScene extends Phaser.Scene {
         });
         switch (Math.floor(Math.random() * 3)) {
             case 0: {
-                this.time.delayedCall(600, this.addRandomTipula, [], this);
+                this.time.delayedCall(600, this.addRandomTipula, [false], this);
                 break;
             }
             case 1: {
-                this.time.delayedCall(600, this.addRandomFalena, [], this);
+                this.time.delayedCall(600, this.addRandomFalena, [true], this);
                 break;
             }
             case 2: {
-                this.time.delayedCall(600, this.addRandomCoccinella, [], this);
+                this.time.delayedCall(600, this.addRandomCoccinella, [true], this);
                 break;
             }
         }
@@ -148,16 +148,16 @@ export class GameScene extends Phaser.Scene {
 
     }
 
-    addRandomTipula() {
-        this.ragnatela.addInsectToRandomLine('tipula');
+    addRandomTipula(edible: boolean) {
+        this.ragnatela.addInsectToRandomLine('tipula', edible);
     }
 
-    addRandomFalena() {
-        this.ragnatela.addInsectToRandomLine('falena', 4000);
+    addRandomFalena(edible: boolean) {
+        this.ragnatela.addInsectToRandomLine('falena', edible , 4000);
     }
 
-    addRandomCoccinella() {
-        this.ragnatela.addInsectToRandomLine('coccinella', 5000);
+    addRandomCoccinella(edible: boolean) {
+        this.ragnatela.addInsectToRandomLine('coccinella', edible, 5000);
     }
 
     update() {

@@ -14,14 +14,14 @@ export class RagnatelaMidRes extends Phaser.GameObjects.Image {
     private H: Array<{point: Point}>;
     private Z: Array<{point: Point}>;
 
-    private AB: Array<{point: Point, insect: boolean, bonus: boolean, broken: boolean, sprite: Phaser.GameObjects.Image }>;
-    private BC: Array<{point: Point, insect: boolean, bonus: boolean, broken: boolean, sprite: Phaser.GameObjects.Image }>;
-    private CD: Array<{point: Point, insect: boolean, bonus: boolean, broken: boolean, sprite: Phaser.GameObjects.Image }>;
-    private DE: Array<{point: Point, insect: boolean, bonus: boolean, broken: boolean, sprite: Phaser.GameObjects.Image }>;
-    private EF: Array<{point: Point, insect: boolean, bonus: boolean, broken: boolean, sprite: Phaser.GameObjects.Image }>;
-    private FG: Array<{point: Point, insect: boolean, bonus: boolean, broken: boolean, sprite: Phaser.GameObjects.Image }>;
-    private GH: Array<{point: Point, insect: boolean, bonus: boolean, broken: boolean, sprite: Phaser.GameObjects.Image }>;
-    private HA: Array<{point: Point, insect: boolean, bonus: boolean, broken: boolean, sprite: Phaser.GameObjects.Image }>;
+    private AB: Array<{point: Point, insect: boolean, bonus: boolean, broken: boolean, edible: boolean, sprite: Phaser.GameObjects.Image }>;
+    private BC: Array<{point: Point, insect: boolean, bonus: boolean, broken: boolean, edible: boolean, sprite: Phaser.GameObjects.Image }>;
+    private CD: Array<{point: Point, insect: boolean, bonus: boolean, broken: boolean, edible: boolean, sprite: Phaser.GameObjects.Image }>;
+    private DE: Array<{point: Point, insect: boolean, bonus: boolean, broken: boolean, edible: boolean, sprite: Phaser.GameObjects.Image }>;
+    private EF: Array<{point: Point, insect: boolean, bonus: boolean, broken: boolean, edible: boolean, sprite: Phaser.GameObjects.Image }>;
+    private FG: Array<{point: Point, insect: boolean, bonus: boolean, broken: boolean, edible: boolean, sprite: Phaser.GameObjects.Image }>;
+    private GH: Array<{point: Point, insect: boolean, bonus: boolean, broken: boolean, edible: boolean, sprite: Phaser.GameObjects.Image }>;
+    private HA: Array<{point: Point, insect: boolean, bonus: boolean, broken: boolean, edible: boolean, sprite: Phaser.GameObjects.Image }>;
 
     constructor(scene: Phaser.Scene, texture: string) {
         super(
@@ -81,52 +81,52 @@ export class RagnatelaMidRes extends Phaser.GameObjects.Image {
             { point: new Point(95,193) },
             ];
         this.AB = [
-            { point: new Point(208,145), insect: false, bonus: false, broken: false, sprite: null },
-            { point: new Point(205,123), insect: false, bonus: false, broken: false, sprite: null },
-            { point: new Point(204,104), insect: false, bonus: false, broken: false, sprite: null },
-            { point: new Point(196,83), insect: false, bonus: false, broken: false, sprite: null },
+            { point: new Point(208,145), insect: false, bonus: false, broken: false, edible: false, sprite: null },
+            { point: new Point(205,123), insect: false, bonus: false, broken: false, edible: false, sprite: null },
+            { point: new Point(204,104), insect: false, bonus: false, broken: false, edible: false, sprite: null },
+            { point: new Point(196,83), insect: false, bonus: false, broken: false, edible: false, sprite: null },
             ];
         this.BC = [
-            { point: new Point(237,149), insect: false, bonus: false, broken: false, sprite: null },
-            { point: new Point(247,133), insect: false, bonus: false, broken: false, sprite: null },
-            { point: new Point(258,113), insect: false, bonus: false, broken: false, sprite: null },
-            { point: new Point(274,91), insect: false, bonus: false, broken: false, sprite: null },
+            { point: new Point(237,149), insect: false, bonus: false, broken: false, edible: false, sprite: null },
+            { point: new Point(247,133), insect: false, bonus: false, broken: false, edible: false, sprite: null },
+            { point: new Point(258,113), insect: false, bonus: false, broken: false, edible: false, sprite: null },
+            { point: new Point(274,91), insect: false, bonus: false, broken: false, edible: false, sprite: null },
             ];
         this.CD = [
-            { point: new Point(257,165), insect: false, bonus: false, broken: false, sprite: null },
-            { point: new Point(279,158), insect: false, bonus: false, broken: false, sprite: null },
-            { point: new Point(297,151), insect: false, bonus: false, broken: false, sprite: null },
-            { point: new Point(318,142), insect: false, bonus: false, broken: false, sprite: null },
+            { point: new Point(257,165), insect: false, bonus: false, broken: false, edible: false, sprite: null },
+            { point: new Point(279,158), insect: false, bonus: false, broken: false, edible: false, sprite: null },
+            { point: new Point(297,151), insect: false, bonus: false, broken: false, edible: false, sprite: null },
+            { point: new Point(318,142), insect: false, bonus: false, broken: false, edible: false, sprite: null },
             ];
         this.DE = [
-            { point: new Point(251,198), insect: false, bonus: false, broken: false, sprite: null },
-            { point: new Point(269,207), insect: false, bonus: false, broken: false, sprite: null },
-            { point: new Point(285,212), insect: false, bonus: false, broken: false, sprite: null },
-            { point: new Point(308,224), insect: false, bonus: false, broken: false, sprite: null },
+            { point: new Point(251,198), insect: false, bonus: false, broken: false, edible: false, sprite: null },
+            { point: new Point(269,207), insect: false, bonus: false, broken: false, edible: false, sprite: null },
+            { point: new Point(285,212), insect: false, bonus: false, broken: false, edible: false, sprite: null },
+            { point: new Point(308,224), insect: false, bonus: false, broken: false, edible: false, sprite: null },
             ];
         this.EF = [
-            { point: new Point(220,224), insect: false, bonus: false, broken: false, sprite: null },
-            { point: new Point(228,249), insect: false, bonus: false, broken: false, sprite: null },
-            { point: new Point(227,276), insect: false, bonus: false, broken: false, sprite: null },
-            { point: new Point(239,302), insect: false, bonus: false, broken: false, sprite: null },
+            { point: new Point(220,224), insect: false, bonus: false, broken: false, edible: false, sprite: null },
+            { point: new Point(228,249), insect: false, bonus: false, broken: false, edible: false, sprite: null },
+            { point: new Point(227,276), insect: false, bonus: false, broken: false, edible: false, sprite: null },
+            { point: new Point(239,302), insect: false, bonus: false, broken: false, edible: false, sprite: null },
             ];
         this.FG = [
-            { point: new Point(191,218), insect: false, bonus: false, broken: false, sprite: null },
-            { point: new Point(177,243), insect: false, bonus: false, broken: false, sprite: null },
-            { point: new Point(165,260), insect: false, bonus: false, broken: false, sprite: null },
-            { point: new Point(149,282), insect: false, bonus: false, broken: false, sprite: null },
+            { point: new Point(191,218), insect: false, bonus: false, broken: false, edible: false, sprite: null },
+            { point: new Point(177,243), insect: false, bonus: false, broken: false, edible: false, sprite: null },
+            { point: new Point(165,260), insect: false, bonus: false, broken: false, edible: false, sprite: null },
+            { point: new Point(149,282), insect: false, bonus: false, broken: false, edible: false, sprite: null },
             ];
         this.GH = [
-            { point: new Point(180,197), insect: false, bonus: false, broken: false, sprite: null },
-            { point: new Point(154,204), insect: false, bonus: false, broken: false, sprite: null },
-            { point: new Point(135,214), insect: false, bonus: false, broken: false, sprite: null },
-            { point: new Point(110,220), insect: false, bonus: false, broken: false, sprite: null },
+            { point: new Point(180,197), insect: false, bonus: false, broken: false, edible: false, sprite: null },
+            { point: new Point(154,204), insect: false, bonus: false, broken: false, edible: false, sprite: null },
+            { point: new Point(135,214), insect: false, bonus: false, broken: false, edible: false, sprite: null },
+            { point: new Point(110,220), insect: false, bonus: false, broken: false, edible: false, sprite: null },
             ];
         this.HA = [
-            { point: new Point(184,166), insect: false, bonus: false, broken: false, sprite: null },
-            { point: new Point(162,157), insect: false, bonus: false, broken: false, sprite: null },
-            { point: new Point(149,142), insect: false, bonus: false, broken: false, sprite: null },
-            { point: new Point(123,138), insect: false, bonus: false, broken: false, sprite: null },
+            { point: new Point(184,166), insect: false, bonus: false, broken: false, edible: false, sprite: null },
+            { point: new Point(162,157), insect: false, bonus: false, broken: false, edible: false, sprite: null },
+            { point: new Point(149,142), insect: false, bonus: false, broken: false, edible: false, sprite: null },
+            { point: new Point(123,138), insect: false, bonus: false, broken: false, edible: false, sprite: null },
             ];
         this.Z = [{ point: new Point(215,184) }];
     }
@@ -481,15 +481,16 @@ export class RagnatelaMidRes extends Phaser.GameObjects.Image {
         }
     }
 
-    addInsectToRandomLine(texture: string, destroyDelay = 1500) {
+    addInsectToRandomLine(texture: string, edible: boolean, destroyDelay = 1500) {
         let line = this.getRandomLine();
         line.insect = true;
-        let insect = this.scene.add.image(line.point.x, line.point.y, texture);
-        this.scene.time.delayedCall(destroyDelay, this.destroyInsect, [insect, line], this);
+        line.edible = edible;
+        line.sprite = this.scene.add.image(line.point.x, line.point.y, texture);
+        this.scene.time.delayedCall(destroyDelay, this.destroyInsect, [line], this);
     }
 
-    destroyInsect(insect, line) {
-        insect.destroy();
+    destroyInsect(line) {
+        line.sprite.destroy();
         line.insect = false;
         line.sprite = this.scene.add.image(line.point.x, line.point.y, 'hole');
         line.broken = true;
