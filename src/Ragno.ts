@@ -49,6 +49,8 @@ export class Ragno extends Phaser.Physics.Arcade.Sprite {
 
         if (this.ragnatela.isMovingOnRamo(this.myWebNode, webNode)) {
 
+            this.movingSound.play();
+            this.anims.play('move', true);
             this.targetNode = new Phaser.Math.Vector2(pointToMoveTo.x, pointToMoveTo.y);
             this.scene.physics.moveToObject(this, this.targetNode, this.speed);
             this.myWebNode = webNode;
@@ -59,16 +61,21 @@ export class Ragno extends Phaser.Physics.Arcade.Sprite {
             if (lineBetween.insect) {
 
                 if (lineBetween.edible) {
-                    this.waitNode = new Phaser.Math.Vector2(lineBetween.point.x, lineBetween.point.y);
+                    this.movingSound.play();
+                    this.anims.play('move', true);
                     this.targetNode = new Phaser.Math.Vector2(pointToMoveTo.x, pointToMoveTo.y);
-                    this.scene.physics.moveToObject(this, this.waitNode, this.speed);
-                    this.previousNode = this.myWebNode;
+                    this.scene.physics.moveToObject(this, this.targetNode, this.speed);
                     this.myWebNode = webNode;
+                    lineBetween.sprite.destroy();
+                    lineBetween.insect = false;
+                    lineBetween.edible = false;
                 } else {
                     console.log('INSETTI grandi, non mi muovo');
                 }
             } else
             if (lineBetween.broken) {
+                this.movingSound.play();
+                this.anims.play('move', true);
                 this.waitNode = new Phaser.Math.Vector2(lineBetween.point.x, lineBetween.point.y);
                 this.targetNode = new Phaser.Math.Vector2(pointToMoveTo.x, pointToMoveTo.y);
                 this.scene.physics.moveToObject(this, this.waitNode, this.speed);
@@ -90,13 +97,17 @@ export class Ragno extends Phaser.Physics.Arcade.Sprite {
                         break;
                     }
                 }
-                lineBetween.sprite.destroy();
-                lineBetween.bonus = false;
+                this.movingSound.play();
+                this.anims.play('move', true);
                 this.targetNode = new Phaser.Math.Vector2(pointToMoveTo.x, pointToMoveTo.y);
                 this.scene.physics.moveToObject(this, this.targetNode, this.speed);
                 this.myWebNode = webNode;
+                lineBetween.sprite.destroy();
+                lineBetween.bonus = false;
             }
             else {
+                this.movingSound.play();
+                this.anims.play('move', true);
                 this.targetNode = new Phaser.Math.Vector2(pointToMoveTo.x, pointToMoveTo.y);
                 this.scene.physics.moveToObject(this, this.targetNode, this.speed);
                 this.myWebNode = webNode;
@@ -105,8 +116,6 @@ export class Ragno extends Phaser.Physics.Arcade.Sprite {
     }
 
     private prepareMovingAnimation(webNode: WebNode) {
-        this.movingSound.play();
-        this.anims.play('move', true);
         let currentPoint = this.ragnatela.getPoint(this.myWebNode);
         let pointToMoveTo = this.ragnatela.getPoint(webNode);
         this.rotation = Phaser.Math.Angle.BetweenPoints(currentPoint, pointToMoveTo);
