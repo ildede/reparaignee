@@ -45,6 +45,7 @@ export class GameScene extends Phaser.Scene {
         this.load.image('alberi', 'assets/sprites/alberimidres.png');
         this.load.image('ragno', 'assets/sprites/ragnomidres.png');
         this.load.image('tipula', 'assets/sprites/tipulamidres.png');
+        this.load.image('falena', 'assets/sprites/falenamidres.png');
         this.load.image('hole', 'assets/sprites/hole.png');
     }
 
@@ -61,7 +62,7 @@ export class GameScene extends Phaser.Scene {
         this.add.image(this.scale.width/2,this.scale.height/2, 'alberi');
         this.ragno = new Ragno(this, 'ragno', this.ragnatela);
         this.cursorKeys = this.input.keyboard.createCursorKeys();
-        this.up1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+        this.up1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
         this.upRight1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
         this.right1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
         this.downRight1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C);
@@ -94,11 +95,25 @@ export class GameScene extends Phaser.Scene {
         this.sound.play('flycatch', {
             volume: 1.5
         });
-        this.time.delayedCall(600, this.addRandomTipula, [], this);
+        switch (Math.floor(Math.random() * 2)) {
+            case 0: {
+                this.time.delayedCall(600, this.addRandomTipula, [], this);
+                break;
+            }
+            case 1: {
+                this.time.delayedCall(600, this.addRandomFalena, [], this);
+                break;
+            }
+        }
+
     }
 
     addRandomTipula() {
         this.ragnatela.addToRandomLine('tipula');
+    }
+
+    addRandomFalena() {
+        this.ragnatela.addToRandomLine('falena');
     }
 
     update() {
