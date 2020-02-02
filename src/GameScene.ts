@@ -38,6 +38,7 @@ export class GameScene extends Phaser.Scene {
     preload() {
         this.load.audio('flycatch', 'assets/audio/flycatch.mp3');
         this.load.audio('spidermove', 'assets/audio/spidermove.mp3');
+        this.load.audio('spiderrepair', 'assets/audio/webrepair.mp3');
         this.load.audio('music', 'assets/audio/music.mp3');
         this.load.audio('birds', 'assets/audio/birds.mp3');
         this.load.image('ragnatela', 'assets/sprites/ragnatelamidres.png');

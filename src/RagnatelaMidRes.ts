@@ -519,6 +519,14 @@ export class RagnatelaMidRes extends Phaser.GameObjects.Image {
         }
     }
 
+    getLineBetween(from: WebNode, to: WebNode) {
+        if (this[from.ramo+to.ramo]) {
+            return this[from.ramo+to.ramo][from.giro];
+        } else {
+            return this[to.ramo+from.ramo][from.giro];
+        }
+    }
+
     private isMovingOnRamo(from: WebNode, to: WebNode) {
         return from.ramo === 'Z' || to.ramo === 'Z' || from.ramo === to.ramo;
     }
