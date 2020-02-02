@@ -46,13 +46,20 @@ export class Ragno extends Phaser.Physics.Arcade.Sprite {
 
     updatePositionTo(webNode: WebNode) {
         if (this.ragnatela.hasInsectBetween(this.myWebNode, webNode)) {
-            console.log('INSETTI, non mi muovo');
+            let lineBetween = this.ragnatela.getLineBetween(this.myWebNode, webNode);
+            if (lineBetween.edible) {
+                console.log('MANGIA');
+                let pointToMoveTo = this.prepareMovingAnimation(webNode);
+                this.waitNode = new Phaser.Math.Vector2(lineBetween.point.x, lineBetween.point.y);
+                this.targetNode = new Phaser.Math.Vector2(pointToMoveTo.x, pointToMoveTo.y);
+                this.scene.physics.moveToObject(this, this.waitNode, this.speed);
+                this.previousNode = this.myWebNode;
+                this.myWebNode = webNode;
+            } else {
+                console.log('INSETTI grandi, non mi muovo');
+            }
         } else {
-            this.movingSound.play();
-            this.anims.play('move', true);
-            let currentPoint = this.ragnatela.getPoint(this.myWebNode);
-            let pointToMoveTo = this.ragnatela.getPoint(webNode);
-            this.rotation = Phaser.Math.Angle.BetweenPoints(currentPoint, pointToMoveTo);
+            let pointToMoveTo = this.prepareMovingAnimation(webNode);
             if (this.ragnatela.isBrokenBetween(this.myWebNode, webNode)) {
                 let lineBetween = this.ragnatela.getLineBetween(this.myWebNode, webNode);
                 this.waitNode = new Phaser.Math.Vector2(lineBetween.point.x, lineBetween.point.y);
@@ -86,6 +93,15 @@ export class Ragno extends Phaser.Physics.Arcade.Sprite {
                 this.myWebNode = webNode;
             }
         }
+    }
+
+    private prepareMovingAnimation(webNode: WebNode) {
+        this.movingSound.play();
+        this.anims.play('move', true);
+        let currentPoint = this.ragnatela.getPoint(this.myWebNode);
+        let pointToMoveTo = this.ragnatela.getPoint(webNode);
+        this.rotation = Phaser.Math.Angle.BetweenPoints(currentPoint, pointToMoveTo);
+        return pointToMoveTo;
     }
 
     up() {
