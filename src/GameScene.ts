@@ -10,6 +10,8 @@ const sceneConfig: Phaser.Types.Scenes.SettingsConfig = {
 
 export class GameScene extends Phaser.Scene {
 
+    private readonly MAX_HOLE_COUNT = 0;
+
     private cursorKeys: Phaser.Types.Input.Keyboard.CursorKeys;
     private ragno: Ragno;
     private ragnatela: RagnatelaMidRes;
@@ -113,42 +115,45 @@ export class GameScene extends Phaser.Scene {
     }
 
     addRandomInsect() {
-        this.sound.play('flycatch', {
-            volume: 1.5
-        });
-        switch (Math.floor(Math.random() * 3)) {
-            case 0: {
-                this.time.delayedCall(600, this.addRandomTipula, [false], this);
-                break;
-            }
-            case 1: {
-                this.time.delayedCall(600, this.addRandomFalena, [true], this);
-                break;
-            }
-            case 2: {
-                this.time.delayedCall(600, this.addRandomCoccinella, [true], this);
-                break;
+        if (!this.ragno.dead) {
+            this.sound.play('flycatch', {
+                volume: 1.5
+            });
+            switch (Math.floor(Math.random() * 3)) {
+                case 0: {
+                    this.time.delayedCall(600, this.addRandomTipula, [false], this);
+                    break;
+                }
+                case 1: {
+                    this.time.delayedCall(600, this.addRandomFalena, [true], this);
+                    break;
+                }
+                case 2: {
+                    this.time.delayedCall(600, this.addRandomCoccinella, [true], this);
+                    break;
+                }
             }
         }
 
     }
 
     addRandomBonus() {
-        switch (Math.floor(Math.random() * 3)) {
-            case 0: {
-                console.log('niente bonus questa volta');
-                break;
-            }
-            case 1: {
-                this.ragnatela.addBonusToRandomLine('caffe');
-                break;
-            }
-            case 2: {
-                this.ragnatela.addBonusToRandomLine('fungo');
-                break;
+        if (!this.ragno.dead) {
+            switch (Math.floor(Math.random() * 3)) {
+                case 0: {
+                    console.log('niente bonus questa volta');
+                    break;
+                }
+                case 1: {
+                    this.ragnatela.addBonusToRandomLine('caffe');
+                    break;
+                }
+                case 2: {
+                    this.ragnatela.addBonusToRandomLine('fungo');
+                    break;
+                }
             }
         }
-
     }
 
     addRandomTipula(edible: boolean) {
@@ -164,45 +169,53 @@ export class GameScene extends Phaser.Scene {
     }
 
     update() {
-        if (this.ragno.isMoving()) {
-            this.ragno.updatePosition();
-        } else {
-            if (this.input.activePointer.isDown) {
-                if (!this.alreadyDown) {
-                    this.alreadyDown = true;
-                    console.log('X:' + this.input.activePointer.x);
-                    console.log('Y:' + this.input.activePointer.y);
-                }
+        if (this.ragnatela.holeCount > this.MAX_HOLE_COUNT) {
+            if (!this.ragno.dead) {
+                this.ragno.gameOver();
             } else {
-                this.alreadyDown = false;
+                this.ragno.updateDeadPosition();
             }
+        } else {
+            if (this.ragno.isMoving()) {
+                this.ragno.updatePosition();
+            } else {
+                if (this.input.activePointer.isDown) {
+                    if (!this.alreadyDown) {
+                        this.alreadyDown = true;
+                        console.log('X:' + this.input.activePointer.x);
+                        console.log('Y:' + this.input.activePointer.y);
+                    }
+                } else {
+                    this.alreadyDown = false;
+                }
 
-            if (Phaser.Input.Keyboard.JustDown(this.up1) || Phaser.Input.Keyboard.JustDown(this.up2)) {
-                this.ragno.up();
-            }
-            if (Phaser.Input.Keyboard.JustDown(this.upRight1) || Phaser.Input.Keyboard.JustDown(this.upRight2)) {
-                this.ragno.upRight();
-            }
-            if (Phaser.Input.Keyboard.JustDown(this.right1) || Phaser.Input.Keyboard.JustDown(this.right2)) {
-                this.ragno.right();
-            }
-            if (Phaser.Input.Keyboard.JustDown(this.downRight1) || Phaser.Input.Keyboard.JustDown(this.downRight2)) {
-                this.ragno.downRight();
-            }
-            if (Phaser.Input.Keyboard.JustDown(this.down1) || Phaser.Input.Keyboard.JustDown(this.down2)) {
-                this.ragno.down();
-            }
-            if (Phaser.Input.Keyboard.JustDown(this.downLeft1) || Phaser.Input.Keyboard.JustDown(this.downLeft2)) {
-                this.ragno.downLeft();
-            }
-            if (Phaser.Input.Keyboard.JustDown(this.left1) || Phaser.Input.Keyboard.JustDown(this.left2)) {
-                this.ragno.left();
-            }
-            if (Phaser.Input.Keyboard.JustDown(this.upLeft1) || Phaser.Input.Keyboard.JustDown(this.upLeft2)) {
-                this.ragno.upLeft();
-            }
+                if (Phaser.Input.Keyboard.JustDown(this.up1) || Phaser.Input.Keyboard.JustDown(this.up2)) {
+                    this.ragno.up();
+                }
+                if (Phaser.Input.Keyboard.JustDown(this.upRight1) || Phaser.Input.Keyboard.JustDown(this.upRight2)) {
+                    this.ragno.upRight();
+                }
+                if (Phaser.Input.Keyboard.JustDown(this.right1) || Phaser.Input.Keyboard.JustDown(this.right2)) {
+                    this.ragno.right();
+                }
+                if (Phaser.Input.Keyboard.JustDown(this.downRight1) || Phaser.Input.Keyboard.JustDown(this.downRight2)) {
+                    this.ragno.downRight();
+                }
+                if (Phaser.Input.Keyboard.JustDown(this.down1) || Phaser.Input.Keyboard.JustDown(this.down2)) {
+                    this.ragno.down();
+                }
+                if (Phaser.Input.Keyboard.JustDown(this.downLeft1) || Phaser.Input.Keyboard.JustDown(this.downLeft2)) {
+                    this.ragno.downLeft();
+                }
+                if (Phaser.Input.Keyboard.JustDown(this.left1) || Phaser.Input.Keyboard.JustDown(this.left2)) {
+                    this.ragno.left();
+                }
+                if (Phaser.Input.Keyboard.JustDown(this.upLeft1) || Phaser.Input.Keyboard.JustDown(this.upLeft2)) {
+                    this.ragno.upLeft();
+                }
 
+            }
+            this.ragno.updateParticles();
         }
-        this.ragno.updateParticles();
     }
 }

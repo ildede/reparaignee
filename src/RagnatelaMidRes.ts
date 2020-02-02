@@ -23,6 +23,8 @@ export class RagnatelaMidRes extends Phaser.GameObjects.Image {
     private GH: Array<{point: Point, insect: boolean, bonus: boolean, broken: boolean, edible: boolean, sprite: Phaser.GameObjects.Image }>;
     private HA: Array<{point: Point, insect: boolean, bonus: boolean, broken: boolean, edible: boolean, sprite: Phaser.GameObjects.Image }>;
 
+    holeCount: number;
+
     constructor(scene: Phaser.Scene, texture: string) {
         super(
             scene,
@@ -32,6 +34,7 @@ export class RagnatelaMidRes extends Phaser.GameObjects.Image {
         );
         scene.add.existing(this);
 
+        this.holeCount = 0;
         this.A = [
             { point: new Point(189,144) },
             { point: new Point(173,120) },
@@ -494,6 +497,7 @@ export class RagnatelaMidRes extends Phaser.GameObjects.Image {
             line.sprite.destroy();
             line.insect = false;
             line.edible = false;
+            this.holeCount += 1;
             line.sprite = this.scene.add.image(line.point.x, line.point.y, 'hole');
             line.broken = true;
         }
@@ -509,6 +513,7 @@ export class RagnatelaMidRes extends Phaser.GameObjects.Image {
     destroyBonus(line) {
         if (line.sprite) {
             line.sprite.destroy();
+            line.insect = false;
             line.edible = false;
             line.bonus = false;
         }
@@ -525,13 +530,11 @@ export class RagnatelaMidRes extends Phaser.GameObjects.Image {
     isMovingOnRamo(from: WebNode, to: WebNode) {
         return from.ramo === 'Z' || to.ramo === 'Z' || from.ramo === to.ramo;
     }
+
     repairBetween(from: WebNode, to: WebNode) {
-        if (this[from.ramo+to.ramo]) {
-            this[from.ramo+to.ramo][from.giro].sprite.destroy();
-            this[from.ramo+to.ramo][from.giro].broken = false;
-        } else {
-            this[to.ramo+from.ramo][from.giro].sprite.destroy();
-            this[to.ramo+from.ramo][from.giro].broken = false;
-        }
+        let lineBetween = this.getLineBetween(from, to);
+        lineBetween.sprite.destroy();
+        lineBetween.broken = false;
+        this.holeCount -= 1;
     }
 }

@@ -15,12 +15,14 @@ export class Ragno extends Phaser.Physics.Arcade.Sprite {
     private lockOnRepair: boolean = false;
     private previousNode: WebNode;
     private particles: Array<any> = [];
+    dead: boolean;
 
     constructor(scene: Scene, texture: string, ragnatela: RagnatelaMidRes) {
         super(scene, 206, 0, texture);
         this.ragnatela = ragnatela;
         this.myWebNode = this.ragnatela.getStartingNode();
         this.targetNode = null;
+        this.dead = false;
         this.movingSound = this.scene.sound.add('spidermove');
         this.repairingSound = this.scene.sound.add('spiderrepair', {
             volume: .2
@@ -190,6 +192,10 @@ export class Ragno extends Phaser.Physics.Arcade.Sprite {
         }
     }
 
+    updateDeadPosition() {
+        this.anims.play('stay', true);
+    }
+
     isMoving() {
         // @ts-ignore
         return this.targetNode && (this.body.speed > 0 || this.lockOnRepair);
@@ -243,5 +249,12 @@ export class Ragno extends Phaser.Physics.Arcade.Sprite {
             sprite.destroy();
         }
         this.particles = [];
+    }
+
+    gameOver() {
+        this.dead = true;
+        var deathNode = new Phaser.Math.Vector2(this.body.x, 800);
+        this.scene.physics.moveToObject(this, deathNode, 150);
+        // this.scene.start('GameOver');
     }
 }
