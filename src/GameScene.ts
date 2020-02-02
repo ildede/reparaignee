@@ -91,7 +91,9 @@ export class GameScene extends Phaser.Scene {
     }
 
     addRandomInsect() {
-        this.sound.play('flycatch');
+        this.sound.play('flycatch', {
+            volume: 1.5
+        });
         this.time.delayedCall(600, this.addRandomTipula, [], this);
     }
 

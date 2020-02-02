@@ -21,7 +21,9 @@ export class Ragno extends Phaser.Physics.Arcade.Image {
         this.myWebNode = this.ragnatela.getStartingNode();
         this.targetNode = null;
         this.movingSound = this.scene.sound.add('spidermove');
-        this.repairingSound = this.scene.sound.add('spiderrepair');
+        this.repairingSound = this.scene.sound.add('spiderrepair', {
+            volume: .2
+        });
         this.setDepth(10);
         scene.add.existing(this);
         scene.physics.add.existing(this);
@@ -40,7 +42,7 @@ export class Ragno extends Phaser.Physics.Arcade.Image {
                 let lineBetween = this.ragnatela.getLineBetween(this.myWebNode, webNode);
                 this.waitNode = new Phaser.Math.Vector2(lineBetween.point.x, lineBetween.point.y);
                 this.targetNode = new Phaser.Math.Vector2(pointToMoveTo.x, pointToMoveTo.y);
-                this.scene.physics.moveToObject(this, this.waitNode, this.speed * .4);
+                this.scene.physics.moveToObject(this, this.waitNode, this.speed);
                 this.previousNode = this.myWebNode;
                 this.myWebNode = webNode;
 
