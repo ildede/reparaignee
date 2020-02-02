@@ -47,6 +47,11 @@ export class Ragno extends Phaser.Physics.Arcade.Image {
                 this.myWebNode = webNode;
 
             } else {
+                if (this.ragnatela.hasBonusBetween(this.myWebNode, webNode)) {
+                    let lineBetween = this.ragnatela.getLineBetween(this.myWebNode, webNode);
+                    lineBetween.sprite.destroy();
+                    lineBetween.bonus = false;
+                }
                 this.targetNode = new Phaser.Math.Vector2(pointToMoveTo.x, pointToMoveTo.y);
                 this.scene.physics.moveToObject(this, this.targetNode, this.speed);
                 this.myWebNode = webNode;

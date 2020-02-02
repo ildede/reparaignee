@@ -495,16 +495,18 @@ export class RagnatelaMidRes extends Phaser.GameObjects.Image {
         line.broken = true;
     }
 
-    addBonusToRandomLine(texture: string, destroydelay = 3000) {
+    addBonusToRandomLine(texture: string, destroyDelay = 5000) {
         let line = this.getRandomLine();
         line.bonus = true;
-        let bonus = this.scene.add.image(line.point.x, line.point.y, texture);
-        this.scene.time.delayedCall(destroydelay, this.destroyBonus, [bonus, line], this);
+        line.sprite = this.scene.add.image(line.point.x, line.point.y, texture);
+        this.scene.time.delayedCall(destroyDelay, this.destroyBonus, [line], this);
     }
 
-    destroyBonus(bonus, line) {
-        bonus.destroy();
-        line.bonus = false;
+    destroyBonus(line) {
+        if (line.sprite) {
+            line.sprite.destroy();
+            line.bonus = false;
+        }
     }
 
     hasInsectBetween(from: WebNode, to: WebNode) {
@@ -515,6 +517,18 @@ export class RagnatelaMidRes extends Phaser.GameObjects.Image {
                 return this[from.ramo+to.ramo][from.giro].insect;
             } else {
                 return this[to.ramo+from.ramo][from.giro].insect;
+            }
+        }
+    }
+
+    hasBonusBetween(from: WebNode, to: WebNode) {
+        if (this.isMovingOnRamo(from, to)) {
+            return false;
+        } else {
+            if (this[from.ramo+to.ramo]) {
+                return this[from.ramo+to.ramo][from.giro].bonus;
+            } else {
+                return this[to.ramo+from.ramo][from.giro].bonus;
             }
         }
     }
