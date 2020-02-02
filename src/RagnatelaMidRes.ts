@@ -537,4 +537,66 @@ export class RagnatelaMidRes extends Phaser.GameObjects.Image {
         lineBetween.broken = false;
         this.holeCount -= 1;
     }
+
+    brokeFourLines() {
+        let ramo = Math.floor(Math.random() * 8);
+        switch (ramo) {
+            case 0: {
+                for (let abElement of this.AB) {
+                    this.brokeLine(abElement);
+                }
+                break;
+            }
+            case 1: {
+                for (let abElement of this.BC) {
+                    this.brokeLine(abElement);
+                }
+                break;
+            }
+            case 2: {
+                for (let abElement of this.CD) {
+                    this.brokeLine(abElement);
+                }
+                break;
+            }
+            case 3: {
+                for (let abElement of this.DE) {
+                    this.brokeLine(abElement);
+                }                break;
+            }
+            case 4: {
+                for (let abElement of this.EF) {
+                    this.brokeLine(abElement);
+                }
+                break;
+            }
+            case 5: {
+                for (let abElement of this.FG) {
+                    this.brokeLine(abElement);
+                }
+                break;
+            }
+            case 6: {
+                for (let abElement of this.GH) {
+                    this.brokeLine(abElement);
+                }
+                break;
+            }
+            case 7: {
+                for (let abElement of this.HA) {
+                    this.brokeLine(abElement);
+                }
+                break;
+            }
+        }
+    }
+
+    private brokeLine(el: { point: Phaser.Geom.Point; insect: boolean; bonus: boolean; broken: boolean; edible: boolean; sprite: Phaser.GameObjects.Image }) {
+        el.sprite.destroy();
+        el.insect = false;
+        el.bonus = false;
+        el.broken = true;
+        el.edible = false;
+        el.sprite = this.scene.add.image(el.point.x, el.point.y, 'hole');
+    }
 }
