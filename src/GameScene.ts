@@ -55,6 +55,7 @@ export class GameScene extends Phaser.Scene {
             'assets/sprites/ragnosheet.png',
             { frameWidth: 89, frameHeight: 87 }
         );
+        this.load.image('particle', 'assets/sprites/particle.png');
     }
 
     create() {
@@ -200,5 +201,6 @@ export class GameScene extends Phaser.Scene {
             }
 
         }
+        this.ragno.updateParticles();
     }
 }

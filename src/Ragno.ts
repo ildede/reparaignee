@@ -14,6 +14,7 @@ export class Ragno extends Phaser.Physics.Arcade.Sprite {
     private waitNode: Phaser.Math.Vector2;
     private lockOnRepair: boolean = false;
     private previousNode: WebNode;
+    private particles: Array<any> = [];
 
     constructor(scene: Scene, texture: string, ragnatela: RagnatelaMidRes) {
         super(scene, 206, 0, texture);
@@ -85,7 +86,8 @@ export class Ragno extends Phaser.Physics.Arcade.Sprite {
             if (lineBetween.bonus) {
                 switch (lineBetween.sprite.texture.key) {
                     case 'fungo': {
-                        console.log('raccolto fungo');
+                        this.goOnDrugs();
+                        this.scene.time.delayedCall(2000, this.finishDrugs, [], this);
                         break;
                     }
                     case 'caffe': {
@@ -205,5 +207,41 @@ export class Ragno extends Phaser.Physics.Arcade.Sprite {
         this.movingSound.play();
         this.lockOnRepair = false;
         this.scene.physics.moveToObject(this, this.targetNode, this.speed);
+    }
+
+    private goOnDrugs() {
+        this.particles = [];
+        for (var i = 0; i < 300; i++) {
+
+            var x = Phaser.Math.Between(-64, 500);
+            var y = Phaser.Math.Between(-64, 500);
+
+            var image = this.scene.add.image(x, y, 'particle');
+            image.setDepth(11);
+            image.setBlendMode(Phaser.BlendModes.ADD);
+            this.particles.push({ s: image, r: 2 + Math.random() * 6 });
+        }
+    }
+
+    updateParticles() {
+        for (var i = 0; i < this.particles.length; i++)
+        {
+            var sprite = this.particles[i].s;
+
+            sprite.y -= this.particles[i].r;
+
+            if (sprite.y < -256) {
+                sprite.y = 700;
+            }
+        }
+    }
+
+    private finishDrugs() {
+        for (var i = 0; i < this.particles.length; i++)
+        {
+            var sprite = this.particles[i].s;
+            sprite.destroy();
+        }
+        this.particles = [];
     }
 }
