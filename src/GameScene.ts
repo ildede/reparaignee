@@ -42,6 +42,7 @@ export class GameScene extends Phaser.Scene {
     }
 
     preload() {
+        this.load.audio('ninjamantide', 'assets/audio/ninjamantide.mp3');
         this.load.audio('flycatch', 'assets/audio/flycatch.mp3');
         // this.load.audio('spidermove', 'assets/audio/spidermove.mp3');
         this.load.audio('spiderrepair', 'assets/audio/webrepair.mp3');
@@ -143,14 +144,23 @@ export class GameScene extends Phaser.Scene {
         if (!this.ragno.dead && this.mantideEvent) {
             if (this.ragno.conninellaTakenCount > 2) {
                 console.log('HAPPY mantide con coccinelle', this.ragno.conninellaTakenCount);
+                this.mantideEvent = false;
+                this.mantideImage.destroy();
+                this.ragno.conninellaTakenCount = 0;
             } else {
+                this.sound.play('ninjamantide');
+                this.mantideImage.destroy();
+                this.mantideImage = this.add.image(300,340, 'mantideninja');
                 this.ragnatela.brokeFourLines();
-                console.log('NINJA mantide con coccinelle', this.ragno.conninellaTakenCount);
+                this.time.delayedCall(1500, this.removeMantideNinja, [], this);
             }
-            this.mantideEvent = false;
-            this.mantideImage.destroy();
-            this.ragno.conninellaTakenCount = 0;
         }
+    }
+
+    removeMantideNinja() {
+        this.mantideEvent = false;
+        this.mantideImage.destroy();
+        this.ragno.conninellaTakenCount = 0;
     }
 
     addRandomInsect() {

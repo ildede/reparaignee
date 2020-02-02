@@ -592,7 +592,9 @@ export class RagnatelaMidRes extends Phaser.GameObjects.Image {
     }
 
     private brokeLine(el: { point: Phaser.Geom.Point; insect: boolean; bonus: boolean; broken: boolean; edible: boolean; sprite: Phaser.GameObjects.Image }) {
-        el.sprite.destroy();
+        if (el.sprite) {
+            el.sprite.destroy();
+        }
         el.insect = false;
         el.bonus = false;
         el.broken = true;
