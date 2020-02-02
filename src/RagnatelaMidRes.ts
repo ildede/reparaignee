@@ -493,6 +493,7 @@ export class RagnatelaMidRes extends Phaser.GameObjects.Image {
         if (line.sprite) {
             line.sprite.destroy();
             line.insect = false;
+            line.edible = false;
             line.sprite = this.scene.add.image(line.point.x, line.point.y, 'hole');
             line.broken = true;
         }
@@ -508,6 +509,7 @@ export class RagnatelaMidRes extends Phaser.GameObjects.Image {
     destroyBonus(line) {
         if (line.sprite) {
             line.sprite.destroy();
+            line.edible = false;
             line.bonus = false;
         }
     }
