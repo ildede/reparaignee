@@ -45,49 +45,58 @@ export class Ragno extends Phaser.Physics.Arcade.Sprite {
     }
 
     updatePositionTo(webNode: WebNode) {
-        if (this.ragnatela.hasInsectBetween(this.myWebNode, webNode)) {
-            let lineBetween = this.ragnatela.getLineBetween(this.myWebNode, webNode);
-            if (lineBetween.edible) {
-                console.log('MANGIA');
-                let pointToMoveTo = this.prepareMovingAnimation(webNode);
-                this.waitNode = new Phaser.Math.Vector2(lineBetween.point.x, lineBetween.point.y);
-                this.targetNode = new Phaser.Math.Vector2(pointToMoveTo.x, pointToMoveTo.y);
-                this.scene.physics.moveToObject(this, this.waitNode, this.speed);
-                this.previousNode = this.myWebNode;
-                this.myWebNode = webNode;
-            } else {
-                console.log('INSETTI grandi, non mi muovo');
-            }
-        } else {
-            let pointToMoveTo = this.prepareMovingAnimation(webNode);
-            if (this.ragnatela.isBrokenBetween(this.myWebNode, webNode)) {
-                let lineBetween = this.ragnatela.getLineBetween(this.myWebNode, webNode);
-                this.waitNode = new Phaser.Math.Vector2(lineBetween.point.x, lineBetween.point.y);
-                this.targetNode = new Phaser.Math.Vector2(pointToMoveTo.x, pointToMoveTo.y);
-                this.scene.physics.moveToObject(this, this.waitNode, this.speed);
-                this.previousNode = this.myWebNode;
-                this.myWebNode = webNode;
+        let pointToMoveTo = this.prepareMovingAnimation(webNode);
 
-            } else {
-                if (this.ragnatela.hasBonusBetween(this.myWebNode, webNode)) {
-                    let lineBetween = this.ragnatela.getLineBetween(this.myWebNode, webNode);
-                    switch (lineBetween.sprite.texture.key) {
-                        case 'fungo': {
-                            console.log('raccolto fungo');
-                            break;
-                        }
-                        case 'caffe': {
-                            this.speed += 50;
-                            break;
-                        }
-                        default: {
-                            console.log('raccolto boh');
-                            break;
-                        }
-                    }
-                    lineBetween.sprite.destroy();
-                    lineBetween.bonus = false;
+        if (this.ragnatela.isMovingOnRamo(this.myWebNode, webNode)) {
+
+            this.targetNode = new Phaser.Math.Vector2(pointToMoveTo.x, pointToMoveTo.y);
+            this.scene.physics.moveToObject(this, this.targetNode, this.speed);
+            this.myWebNode = webNode;
+
+        } else {
+            let lineBetween = this.ragnatela.getLineBetween(this.myWebNode, webNode);
+
+            if (lineBetween.insect) {
+
+                if (lineBetween.edible) {
+                    this.waitNode = new Phaser.Math.Vector2(lineBetween.point.x, lineBetween.point.y);
+                    this.targetNode = new Phaser.Math.Vector2(pointToMoveTo.x, pointToMoveTo.y);
+                    this.scene.physics.moveToObject(this, this.waitNode, this.speed);
+                    this.previousNode = this.myWebNode;
+                    this.myWebNode = webNode;
+                } else {
+                    console.log('INSETTI grandi, non mi muovo');
                 }
+            } else
+            if (lineBetween.broken) {
+                this.waitNode = new Phaser.Math.Vector2(lineBetween.point.x, lineBetween.point.y);
+                this.targetNode = new Phaser.Math.Vector2(pointToMoveTo.x, pointToMoveTo.y);
+                this.scene.physics.moveToObject(this, this.waitNode, this.speed);
+                this.previousNode = this.myWebNode;
+                this.myWebNode = webNode;
+            } else
+            if (lineBetween.bonus) {
+                switch (lineBetween.sprite.texture.key) {
+                    case 'fungo': {
+                        console.log('raccolto fungo');
+                        break;
+                    }
+                    case 'caffe': {
+                        this.speed += 50;
+                        break;
+                    }
+                    default: {
+                        console.log('raccolto boh');
+                        break;
+                    }
+                }
+                lineBetween.sprite.destroy();
+                lineBetween.bonus = false;
+                this.targetNode = new Phaser.Math.Vector2(pointToMoveTo.x, pointToMoveTo.y);
+                this.scene.physics.moveToObject(this, this.targetNode, this.speed);
+                this.myWebNode = webNode;
+            }
+            else {
                 this.targetNode = new Phaser.Math.Vector2(pointToMoveTo.x, pointToMoveTo.y);
                 this.scene.physics.moveToObject(this, this.targetNode, this.speed);
                 this.myWebNode = webNode;
