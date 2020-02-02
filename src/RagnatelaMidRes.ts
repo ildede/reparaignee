@@ -490,10 +490,12 @@ export class RagnatelaMidRes extends Phaser.GameObjects.Image {
     }
 
     destroyInsect(line) {
-        line.sprite.destroy();
-        line.insect = false;
-        line.sprite = this.scene.add.image(line.point.x, line.point.y, 'hole');
-        line.broken = true;
+        if (line.sprite) {
+            line.sprite.destroy();
+            line.insect = false;
+            line.sprite = this.scene.add.image(line.point.x, line.point.y, 'hole');
+            line.broken = true;
+        }
     }
 
     addBonusToRandomLine(texture: string, destroyDelay = 5000) {
